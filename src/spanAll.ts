@@ -19,6 +19,7 @@ export default function spanAll<T>(predicate: (t: T) => boolean) {
       } else {
         currentDeferredIterable.value(result.value);
       }
+      // not handling back pressure at the moment
       return Promise.resolve();
     });
     return spanDeferredIterable.iterator;
