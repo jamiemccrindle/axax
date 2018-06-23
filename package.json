@@ -1,0 +1,10 @@
+{
+  "name": "aix",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
+  }
+}
