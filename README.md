@@ -1,3 +1,3 @@
 # Async Iterator Extensions
 
-This is a library of async iterator extensions
+A library of async iterator extensions for JavaScript
