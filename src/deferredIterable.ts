@@ -14,7 +14,10 @@ export default class DeferredIterable<T> {
   deferreds: Deferred<IteratorResult<T>>[] = [];
   iterator: AsyncIterableIterator<T>;
   done: boolean = false;
+  noMoreResults: boolean = false;
   backPressureDeferred = new Deferred<void>();
+
+  finallyCallbacks: (() => void)[] = [];
 
   constructor() {
     const self = this;
@@ -22,6 +25,7 @@ export default class DeferredIterable<T> {
     this.iterator = {
       throw(e?: any) {
         self.done = true;
+        self.finallyCallbacks.map(cb => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.reject(e);
@@ -30,6 +34,7 @@ export default class DeferredIterable<T> {
       },
       return(value?: any) {
         self.done = true;
+        self.finallyCallbacks.map(cb => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.resolve({
@@ -48,6 +53,10 @@ export default class DeferredIterable<T> {
         if (queuedItem !== undefined) {
           return Promise.resolve(queuedItem);
         } else {
+          if(self.noMoreResults && !self.done) {
+            self.done = true;
+            self.finallyCallbacks.map(cb => cb());
+          }
           if (self.done) {
             return Promise.resolve({
               done: true,
@@ -63,6 +72,10 @@ export default class DeferredIterable<T> {
         return this;
       }
     };
+  }
+
+  finally(callback: () => void) {
+    this.finallyCallbacks.push(callback);
   }
 
   close() {
@@ -84,7 +97,7 @@ export default class DeferredIterable<T> {
       for (const deferred of this.deferreds) {
         deferred.resolve(result);
       }
-      this.done = true;
+      this.noMoreResults = true;
       return Promise.resolve();
     }
     const deferred = this.deferreds.pop();
