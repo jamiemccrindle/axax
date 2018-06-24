@@ -14,3 +14,9 @@ export * from "./filter";
 export * from "./concat";
 export * from "./fromEvent";
 export * from "./tap";
+
+const windowAny: any = window;
+
+if (typeof windowAny !== "undefined" && windowAny["Aix"] === undefined) {
+  windowAny.Aix = exports;
+}
