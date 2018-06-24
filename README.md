@@ -15,24 +15,28 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 
 ## fromEvents
 
-    import { fromEvents } from "aix/fromEvents";
+```javascript
+import { fromEvents } from "aix/fromEvents";
 
-    const clicks = fromEvents(document, 'click');
+const clicks = fromEvents(document, 'click');
 
-    for await (const click of clicks) {
-        console.log('a button was clicked');
-    }
+for await (const click of clicks) {
+    console.log('a button was clicked');
+}
+```
 
 ## DeferredIterable
 
-    import { DeferredIterable } from "aix/deferredIterable";
+```javascript
+import { DeferredIterable } from "aix/deferredIterable";
 
-    const deferredIterable = new DeferredIterable();
+const deferredIterable = new DeferredIterable();
 
-    document.addEventListener('click', deferredIterable.value);
+document.addEventListener('click', deferredIterable.value);
 
-    deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
+deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
 
-    for await (const click of deferredIterable.iterable) {
-        console.log('a button was clicked');
-    }
+for await (const click of deferredIterable.iterable) {
+    console.log('a button was clicked');
+}
+```
