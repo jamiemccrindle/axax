@@ -15,6 +15,8 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 
 ## fromEvents
 
+```fromEvents``` turns DOM events into an iterable.
+
 ```javascript
 import { fromEvents } from "aix/fromEvents";
 
@@ -26,6 +28,9 @@ for await (const click of clicks) {
 ```
 
 ## DeferredIterable
+
+```DeferredIterable``` makes it easy to turn stream of events into an interable. The code below
+is essentially how ```fromEvents``` was implemented.
 
 ```javascript
 import { DeferredIterable } from "aix/deferredIterable";
