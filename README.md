@@ -37,10 +37,16 @@ import { DeferredIterable } from "aix/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 
-document.addEventListener('click', deferredIterable.value);
+// set up a callback that calls ```value``` on the deferredIterable
+const callback = value => deferredIterable.value(value);
 
+// attach the callback to the click event
+document.addEventListener('click', callback);
+
+// remove the callback when / if the iterable stops
 deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
 
+// go through all the click events
 for await (const click of deferredIterable.iterable) {
     console.log('a button was clicked');
 }
