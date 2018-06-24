@@ -3,12 +3,11 @@ import { Deferred } from "./deferred";
 /**
  * The async iterator equivalent of a deferred
  */
-export default class DeferredIterable<T> {
-
+export class DeferredIterable<T> {
   doneValue = {
     done: true,
     value: {} as T
-  }
+  };
 
   queue: IteratorResult<T>[] = [];
   deferreds: Deferred<IteratorResult<T>>[] = [];
@@ -53,7 +52,7 @@ export default class DeferredIterable<T> {
         if (queuedItem !== undefined) {
           return Promise.resolve(queuedItem);
         } else {
-          if(self.noMoreResults && !self.done) {
+          if (self.noMoreResults && !self.done) {
             self.done = true;
             self.finallyCallbacks.map(cb => cb());
           }
@@ -110,3 +109,5 @@ export default class DeferredIterable<T> {
     }
   }
 }
+
+export default DeferredIterable;

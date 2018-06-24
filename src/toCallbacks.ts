@@ -8,7 +8,7 @@ export class StopError extends Error {}
  * @param source the source iterable
  * @param callback the callback that gets called for each value
  */
-export default async function toCallbacks<T>(
+export async function toCallbacks<T>(
   source: AsyncIterable<T>,
   callback: (result: IteratorResult<T>) => Promise<void>
 ) {
@@ -25,3 +25,5 @@ export default async function toCallbacks<T>(
     }
   }
 }
+
+export default toCallbacks;

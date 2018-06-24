@@ -1,10 +1,7 @@
 /**
  * Reduces values
  */
-export default function reduce<T, A>(
-  reducer: (accumulator: A, next: T) => A,
-  init: A
-) {
+export function reduce<T, A>(reducer: (accumulator: A, next: T) => A, init: A) {
   return async function inner(source: AsyncIterable<T>) {
     let accumulator = init;
     for await (const next of source) {
@@ -13,3 +10,5 @@ export default function reduce<T, A>(
     return accumulator;
   };
 }
+
+export default reduce;

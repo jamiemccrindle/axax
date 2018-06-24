@@ -5,7 +5,7 @@ export interface EventSource<T> {
   removeEventListener: (type: string, callback: any) => void;
 }
 
-export default function fromEvent<T>(source: EventSource<T>, type: string) {
+export function fromEvent<T>(source: EventSource<T>, type: string) {
   const deferredIterable = new DeferredIterable<T>();
   const callback = (event: T) => {
     deferredIterable.value(event);
@@ -14,3 +14,5 @@ export default function fromEvent<T>(source: EventSource<T>, type: string) {
   deferredIterable.finally(() => source.removeEventListener(type, callback));
   return deferredIterable.iterator;
 }
+
+export default fromEvent;

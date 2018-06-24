@@ -10,3 +10,5 @@ export async function* iteratorToIterable<T>(iterator: AsyncIterator<T>) {
     yield next.value;
   }
 }
+
+export default iteratorToIterable;

@@ -16,3 +16,5 @@ export function merge<T>(...sources: AsyncIterable<T>[]) {
   });
   return deferredIterable.iterator;
 }
+
+export default merge;

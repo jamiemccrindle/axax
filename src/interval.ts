@@ -3,7 +3,7 @@ import DeferredIterable from "./deferredIterable";
 /**
  * Emit numbers in sequence
  */
-export default function interval<T>(
+export function interval<T>(
   period: number,
   timeout?: ((callback: () => void, delay: number) => void)
 ) {
@@ -18,3 +18,5 @@ export default function interval<T>(
   inner();
   return deferredIterable.iterator;
 }
+
+export default interval;

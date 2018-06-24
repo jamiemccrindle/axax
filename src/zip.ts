@@ -1,7 +1,7 @@
 /**
  * Zips two iterables
  */
-export default function zip<T>(first: AsyncIterable<T>) {
+export function zip<T>(first: AsyncIterable<T>) {
   return async function* inner(second: AsyncIterable<T>) {
     const iterators = [first, second].map(value =>
       value[Symbol.asyncIterator]()
@@ -17,3 +17,5 @@ export default function zip<T>(first: AsyncIterable<T>) {
     }
   };
 }
+
+export default zip;

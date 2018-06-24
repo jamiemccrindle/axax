@@ -1,7 +1,7 @@
 /**
  * Inserts values at the start of the iterable
  */
-export default function insert<T>(...values: T[]) {
+export function insert<T>(...values: T[]) {
   return async function* inner(source: AsyncIterable<T>) {
     for (const value of values) {
       yield value;
@@ -11,3 +11,5 @@ export default function insert<T>(...values: T[]) {
     }
   };
 }
+
+export default insert;

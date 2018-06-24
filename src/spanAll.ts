@@ -1,7 +1,7 @@
 import DeferredIterable from "./deferredIterable";
 import toCallbacks from "./toCallbacks";
 
-export default function spanAll<T>(predicate: (t: T) => boolean) {
+export function spanAll<T>(predicate: (t: T) => boolean) {
   return function inner(source: AsyncIterable<T>) {
     const spanDeferredIterable = new DeferredIterable<AsyncIterable<T>>();
     let currentDeferredIterable = new DeferredIterable<T>();
@@ -25,3 +25,5 @@ export default function spanAll<T>(predicate: (t: T) => boolean) {
     return spanDeferredIterable.iterator;
   };
 }
+
+export default spanAll;
