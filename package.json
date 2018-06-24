@@ -1,6 +1,6 @@
 {
   "name": "aix",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^23.1.1",
