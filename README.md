@@ -29,9 +29,9 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 
     const deferredIterable = new DeferredIterable();
 
-    document.addEventListener('click', deferredIterable.callback);
+    document.addEventListener('click', deferredIterable.value);
 
-    deferredIterable.finally(() => document.removeCallback('click', deferredIterable));
+    deferredIterable.finally(() => document.removeCallback('click', deferredIterable.value));
 
     for await (const click of deferredIterable.iterable) {
         console.log('a button was clicked');
