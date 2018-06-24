@@ -12,3 +12,5 @@ export * from "./zip";
 export * from "./iterableToArray";
 export * from "./filter";
 export * from "./concat";
+export * from "./fromEvent";
+export * from "./tap";
