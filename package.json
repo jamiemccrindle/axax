@@ -1,7 +1,6 @@
 {
   "name": "aix",
-  "version": "0.0.1",
-  "main": "index.js",
+  "version": "0.0.2",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^23.1.1",
@@ -13,5 +12,7 @@
   },
   "scripts": {
     "test": "jest"
-  }
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts"
 }
