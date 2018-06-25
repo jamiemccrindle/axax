@@ -2,12 +2,12 @@
 
 ## Classes
 
-- [DeferredIterable](#deferredIterable)
+- [DeferredIterable](#deferrediterable)
     - [DeferredIterable.callback](#deferrediterablecallback)
-    - [DeferredIterable.iterable](#deferredIterableiterable)
-    - [DeferredIterable.finally](#deferredIterablefinally)
-    - [DeferredIterable.value](#deferredIterablevalue)
-    - [DeferredIterable.finish](#deferredIterablefinish)
+    - [DeferredIterable.iterable](#deferrediterableiterable)
+    - [DeferredIterable.finally](#deferrediterablefinally)
+    - [DeferredIterable.value](#deferrediterablevalue)
+    - [DeferredIterable.finish](#deferrediterablefinish)
 
 ## Functions
 
