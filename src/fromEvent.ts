@@ -1,4 +1,4 @@
-import DeferredIterable from "./deferredIterable";
+import { DeferredIterable} from "./deferredIterable";
 
 export interface EventSource<T> {
   addEventListener: (type: string, callback: (event: T) => void) => void;

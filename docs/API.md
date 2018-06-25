@@ -210,7 +210,7 @@ import { of } from "aix/of";
 const reduced = concat(
     (accumulator, next) => accumulator + next, // sum the values together
     0
-)(of(1, 2, 3);
+)(of(1, 2, 3));
 
 console.log(reduced); // 6
 ```

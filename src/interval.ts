@@ -1,4 +1,4 @@
-import DeferredIterable from "./deferredIterable";
+import { DeferredIterable } from "./deferredIterable";
 
 /**
  * Emit numbers in sequence

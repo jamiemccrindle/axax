@@ -1,3 +1,5 @@
+import { DeferredIterable } from "./deferredIterable";
+import { toCallbacks } from "./toCallbacks";
 
 /**
  * Merges iterables

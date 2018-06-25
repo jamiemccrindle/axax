@@ -1,5 +1,5 @@
 import { iteratorToIterable } from "./iteratorToIterable";
-import insert from "./insert";
+import { insert } from "./insert";
 
 /**
  * Lookahead into the async iteratable
