@@ -2,26 +2,31 @@
 
 ## Classes
 
-* [DeferredIterable](##DeferredIterable)
+- [DeferredIterable](#DeferredIterable)
+- - [DeferredIterable.callback](#DeferredIterable.callback)
+- - [DeferredIterable.iterable](#DeferredIterable.iterable)
+- - [DeferredIterable.finally](#DeferredIterable.finally)
+- - [DeferredIterable.value](#DeferredIterable.value)
+- - [DeferredIterable.finish](#DeferredIterable.finish)
 
 ## Functions
 
-* [of](#of)
-* [map](#map)
-* [filter](#filter)
-* [flatMap](#flatMap)
-* [concat](#concat)
+- [of](#of)
+- [map](#map)
+- [filter](#filter)
+- [flatMap](#flatMap)
+- [concat](#concat)
 
 # Classes
 
 ## DeferredIterable
 
-```DeferredIterable``` makes it easy to turn stream of events into an interable.
+`DeferredIterable` makes it easy to turn stream of events into an interable.
 
-You typically interact with ```DeferredIterable``` in 2 ways:
+You typically interact with `DeferredIterable` in 2 ways:
 
-* To send data into the ```DeferredIterable``` call the ```callback``` function to send an ```IteratorResult```
-* To read data from the ```DeferredIterable``` use the ```iterable``` property.
+- To send data into the `DeferredIterable` call the `callback` function to send an `IteratorResult`
+- To read data from the `DeferredIterable` use the `iterable` property.
 
 ### Example
 
@@ -45,6 +50,60 @@ for await (const click of deferredIterable.iterable) {
 }
 ```
 
+### DeferredIterable.callback
+
+The callback to call to send a `IteratorResult` into the `DeferredIterable`. An `IteratorResult`
+has a `done` boolean property and a `value` property.
+
+```javascript
+import { DeferredIterable } from "aix/deferredIterable";
+
+const deferredIterable = new DeferredIterable();
+deferredIterable.callback({ done: false, value: 1 });
+deferredIterable.callback({ done: false, value: 2 });
+deferredIterable.callback({ done: false, value: 3 });
+deferredIterable.callback({ done: true });
+
+for await (const item of deferredIterable.iterable) {
+    console.log(item); // prints 1, 2, 3
+}
+```
+
+### DeferredIterable.iterable
+
+An ```AsyncIterable``` that returns values supplied by calling ```callback```.
+
+```javascript
+import { DeferredIterable } from "aix/deferredIterable";
+
+const deferredIterable = new DeferredIterable();
+deferredIterable.callback({ done: false, value: 1 });
+deferredIterable.callback({ done: false, value: 2 });
+deferredIterable.callback({ done: false, value: 3 });
+deferredIterable.callback({ done: true });
+
+for await (const item of deferredIterable.iterable) {
+    console.log(item); // prints 1, 2, 3
+}
+```
+
+### DeferredIterable.finally
+
+The callback supplied to ```finally``` is called when the iterable finishes either 
+because it's run out of values, it has returned or an error was thrown.
+
+### DeferredIterable.value
+
+A helper method to pass a value to the DeferredIterable. Calling
+```deferredIterable.value('test')``` is the same as calling 
+```deferredIterable.callback({ done: false, value: 'test'} )```.
+
+### DeferredIterable.finish
+
+A helper method to signal the last value to DeferredIterable. Calling
+```deferredIterable.finish()``` is the same as calling 
+```deferredIterable.callback({ done: true} )```.
+
 # Functions
 
 ## of
@@ -64,7 +123,7 @@ for await(const item of mapped) {
 
 ## map
 
-Go through each item in the iterable and run a mapping function. The result will be a new 
+Go through each item in the iterable and run a mapping function. The result will be a new
 iterable with the transformed values.
 
 ```javascript
@@ -80,7 +139,7 @@ for await(const item of mapped) {
 
 ## flatMap
 
-Go through each item in the iterable and run a mapping function that returns an async iterable. The 
+Go through each item in the iterable and run a mapping function that returns an async iterable. The
 result is then flattened.
 
 ```javascript
