@@ -51,3 +51,7 @@ for await (const click of deferredIterable.iterable) {
     console.log('a button was clicked');
 }
 ```
+
+# Reference Documentation
+
+* [API Reference](./docs/API.md)
