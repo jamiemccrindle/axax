@@ -1,6 +1,6 @@
 import { restToIterable } from "../restToIterable";
-import iterableToArray from "../iterableToArray";
-import map from "../map";
+import { iterableToArray } from "../iterableToArray";
+import { map } from "../map";
 
 test("map", async () => {
   const result = await iterableToArray(

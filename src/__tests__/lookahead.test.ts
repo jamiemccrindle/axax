@@ -1,7 +1,6 @@
 import { restToIterable } from "../restToIterable";
-import iterableToArray from "../iterableToArray";
-import reduce from "../reduce";
 import { lookahead } from "../lookahead";
+import { iterableToArray } from "../iterableToArray";
 
 test("lookahead", async () => {
   const result = await lookahead(2)(restToIterable(1, 2, 3));

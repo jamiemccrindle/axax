@@ -25,5 +25,3 @@ export async function toCallbacks<T>(
     }
   }
 }
-
-export default toCallbacks;

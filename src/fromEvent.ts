@@ -14,5 +14,3 @@ export function fromEvent<T>(source: EventSource<T>, type: string) {
   deferredIterable.finally(() => source.removeEventListener(type, callback));
   return deferredIterable.iterator;
 }
-
-export default fromEvent;

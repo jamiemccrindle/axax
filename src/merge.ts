@@ -1,5 +1,3 @@
-import DeferredIterable from "./deferredIterable";
-import toCallbacks from "./toCallbacks";
 
 /**
  * Merges iterables
@@ -16,5 +14,3 @@ export function merge<T>(...sources: AsyncIterable<T>[]) {
   });
   return deferredIterable.iterator;
 }
-
-export default merge;

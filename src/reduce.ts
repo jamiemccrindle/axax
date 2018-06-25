@@ -10,5 +10,3 @@ export function reduce<T, A>(reducer: (accumulator: A, next: T) => A, init: A) {
     return accumulator;
   };
 }
-
-export default reduce;

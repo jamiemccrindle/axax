@@ -17,5 +17,3 @@ export function zip<T>(first: AsyncIterable<T>) {
     }
   };
 }
-
-export default zip;

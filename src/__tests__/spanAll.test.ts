@@ -1,9 +1,9 @@
-import { restToIterable } from "../restToIterable";
-import spanAll from "../spanAll";
+import { of } from "../of";
+import { spanAll } from "../spanAll";
 
 test("spanAll", async () => {
   const iterables = spanAll((value: number) => value % 2 === 0)(
-    restToIterable(1, 2, 3, 4, 5, 6)
+    of(1, 2, 3, 4, 5, 6)
   );
   const result = [];
   for await (const iterable of iterables) {

@@ -109,5 +109,3 @@ export class DeferredIterable<T> {
     }
   }
 }
-
-export default DeferredIterable;

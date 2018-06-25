@@ -1,4 +1,4 @@
-import DeferredIterable from "../deferredIterable";
+import { DeferredIterable } from "../deferredIterable";
 
 test("DeferredIterable", async () => {
   const d = new DeferredIterable<number>();

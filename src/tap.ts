@@ -9,5 +9,3 @@ export function tap<T>(func: (t: T) => void) {
     }
   };
 }
-
-export default tap;

@@ -6,5 +6,3 @@ export async function* restToIterable<T>(...values: Array<T>) {
     yield item;
   }
 }
-
-export default restToIterable;

@@ -9,5 +9,3 @@ export function map<TFrom, TTo>(mapper: (t: TFrom, index: number) => TTo) {
     }
   };
 }
-
-export default map;

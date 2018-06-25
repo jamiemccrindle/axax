@@ -14,4 +14,3 @@ export function filter<T>(predicate: (t: T) => boolean) {
   };
 }
 
-export default filter;

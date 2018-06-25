@@ -1,9 +1,9 @@
-import { restToIterable } from "../restToIterable";
+import { of } from "../of";
 import { merge } from "../merge";
-import iterableToArray from "../iterableToArray";
+import { iterableToArray } from "../iterableToArray";
 
 test("merge", async () => {
-  const merged = merge(restToIterable(1, 2, 3), restToIterable(4, 5, 6));
+  const merged = merge(of(1, 2, 3), of(4, 5, 6));
   const result = (await iterableToArray(merged)).sort();
   expect(result).toEqual([1, 2, 3, 4, 5, 6]);
 });

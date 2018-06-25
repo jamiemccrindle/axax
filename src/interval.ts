@@ -18,5 +18,3 @@ export function interval<T>(
   inner();
   return deferredIterable.iterator;
 }
-
-export default interval;

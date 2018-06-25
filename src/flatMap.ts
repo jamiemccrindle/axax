@@ -7,5 +7,3 @@ export function flatMap<TFrom, TTo>(mapper: (t: TFrom) => AsyncIterable<TTo>) {
     }
   };
 }
-
-export default flatMap;

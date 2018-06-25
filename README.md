@@ -4,7 +4,7 @@ A library of async iterator extensions for JavaScript
 
 # Installation
 
-    npm install aix
+    npm install aix # or yarn install aix
 
 # Why Aix?
 
@@ -37,7 +37,7 @@ import { DeferredIterable } from "aix/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 
-// set up a callback that calls ```value``` on the deferredIterable
+// set up a callback that calls value on the deferredIterable
 const callback = value => deferredIterable.value(value);
 
 // attach the callback to the click event

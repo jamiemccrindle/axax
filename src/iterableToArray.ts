@@ -5,5 +5,3 @@ export async function iterableToArray<T>(source: AsyncIterable<T>) {
   }
   return result;
 }
-
-export default iterableToArray;

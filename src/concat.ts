@@ -11,5 +11,3 @@ export function concat<T>(first: AsyncIterable<T>) {
     }
   };
 }
-
-export default concat;

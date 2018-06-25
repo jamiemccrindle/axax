@@ -25,4 +25,3 @@ export function lookahead<T>(howFar: number) {
   };
 }
 
-export default lookahead;

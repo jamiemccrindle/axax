@@ -11,5 +11,3 @@ export function insert<T>(...values: T[]) {
     }
   };
 }
-
-export default insert;

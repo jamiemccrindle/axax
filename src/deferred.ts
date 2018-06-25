@@ -13,5 +13,3 @@ export class Deferred<T> {
     });
   }
 }
-
-export default Deferred;
