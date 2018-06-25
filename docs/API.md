@@ -16,6 +16,8 @@
 - [filter](#filter)
 - [flatMap](#flatMap)
 - [concat](#concat)
+- [reduce](#reduce)
+- [merge](#merge)
 
 # Classes
 
@@ -189,5 +191,40 @@ const concatted = concat(
 
 for await(const item of concatted) {
     console.log(item); // outputs 1, 2, 3, 4
+}
+```
+
+## reduce
+
+Reduce a series of values to a single result. The series of values is
+reduced by a function that compbines a running total or accumulator with
+the next value to produce the new total or accumulator.
+
+```javascript
+import { reduce } from "aix/reduce";
+import { of } from "aix/of";
+
+const reduced = concat(
+    (accumulator, next) => accumulator + next, // sum the values together
+    0
+)(of(1, 2, 3);
+
+console.log(reduced); // 6
+```
+
+## merge
+
+Merge a number of async iterators into one concurrently. Order is not important.
+
+```javascript
+import { merge } from "aix/merge";
+import { of } from "aix/of";
+
+const merged = merge(
+    of(1, 2), of(3, 4)
+);
+
+for await(const item of concatted) {
+    console.log(item); // outputs 1, 2, 3, 4 in no particular order
 }
 ```
