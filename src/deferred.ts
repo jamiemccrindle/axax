@@ -2,7 +2,8 @@
  * A classic deferred
  */
 export class Deferred<T> {
-  resolve: (value?: T | PromiseLike<T>) => void = () => {};
+
+  resolve: (value?: T | PromiseLike<T>) => void = value => {};
   reject: (reason?: any) => void = () => {};
   promise: Promise<T>;
 

@@ -18,6 +18,9 @@
 - [concat](#concat)
 - [reduce](#reduce)
 - [merge](#merge)
+- [insert](#insert)
+- [tap](#tap)
+- [zip](#zip)
 
 # Classes
 
@@ -228,3 +231,58 @@ for await(const item of concatted) {
     console.log(item); // outputs 1, 2, 3, 4 in no particular order
 }
 ```
+
+## insert
+
+Insert values at the beginning of an async iterable.
+
+```javascript
+import { insert } from "aix/insert";
+import { of } from "aix/of";
+
+const inserted = insert(
+    1, 2, 3
+)(of(4, 5, 6));
+
+for await(const item of concatted) {
+    console.log(item); // outputs 1, 2, 3, 4, 5, 6
+}
+```
+
+## tap
+
+'Taps' an async iterable. Allows you to run a function for
+every item in the iterable but doesn't do anything with the 
+result of the function. Typically used for side effects like
+logging.
+
+```javascript
+import { tap } from "aix/tap";
+import { of } from "aix/of";
+
+const tapped = tap(
+    value => console.log(value) // prints 1, 2, 3
+)(of(1, 2, 3));
+
+for await(const item of concatted) {
+    console.log(item); // prints 1, 2, 3
+}
+```
+
+## zip
+
+Creates a new iterable out of the two supplied by pairing up equally-positioned items from both iterables. The returned iterable is truncated to the length of the shorter of the two input iterables.
+
+```javascript
+import { zip } from "aix/zip";
+import { of } from "aix/of";
+
+const zipped = zip(
+    of(1, 2)
+)(of(1, 2));
+
+for await(const item of concatted) {
+    console.log(item); // prints [1, 1], [2, 2]
+}
+```
+
