@@ -9,7 +9,7 @@ export { flatMap } from "./flatMap";
 export { interval } from "./interval";
 export { insert } from "./insert";
 export { zip } from "./zip";
-export { iterableToArray } from "./iterableToArray";
+export { toArray } from "./toArray";
 export { filter } from "./filter";
 export { concat } from "./concat";
 export { fromEvent } from "./fromEvent";

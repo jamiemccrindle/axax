@@ -1,9 +1,9 @@
 import { of } from "../of";
 import { flatMap } from "../flatMap";
-import { iterableToArray } from "../iterableToArray";
+import { toArray } from "../toArray";
 
 test("flatMap", async () => {
-  const result = await iterableToArray(
+  const result = await toArray(
     flatMap(async function*(value: number) {
       yield value * 2;
     })(of(1, 2, 3))
