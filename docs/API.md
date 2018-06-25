@@ -6,11 +6,11 @@
 
 ## Functions
 
-* [of](##of)
-* [map](##map)
-* [filter](##filter)
-* [flatMap](##flatMap)
-* [concat](##concat)
+* [of](#of)
+* [map](#map)
+* [filter](#filter)
+* [flatMap](#flatMap)
+* [concat](#concat)
 
 # Classes
 
