@@ -54,4 +54,4 @@ for await (const click of deferredIterable.iterable) {
 
 # Reference Documentation
 
-* [API Reference](./docs/API.md)
+* [API Reference](https://github.com/jamiemccrindle/aix/blob/master/docs/API.md)

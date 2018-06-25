@@ -2,6 +2,10 @@
   "name": "aix",
   "version": "0.0.14",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/jamiemccrindle/aix",
+    "type": "git"
+  },
   "devDependencies": {
     "@types/jest": "^23.1.1",
     "@types/node": "^10.3.5",
