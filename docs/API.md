@@ -21,6 +21,7 @@
 - [insert](#insert)
 - [tap](#tap)
 - [zip](#zip)
+- [range](#range)
 
 # Classes
 
@@ -283,6 +284,25 @@ const zipped = zip(
 
 for await(const item of concatted) {
     console.log(item); // prints [1, 1], [2, 2]
+}
+```
+
+## range
+
+ Creates an iterable of numbers (positive and/or negative)
+ progressing from start up to, but not including, end. A step
+ of -1 is used if a negative start is specified without an end
+ or step. If end is not specified, it's set to start with start
+ then set to 0.
+
+```javascript
+import { range } from "aix/range";
+import { of } from "aix/of";
+
+const ranged = range(1, 3);
+
+for await(const item of concatted) {
+    console.log(item); // prints 1, 2
 }
 ```
 
