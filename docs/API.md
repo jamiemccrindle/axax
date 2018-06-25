@@ -3,11 +3,11 @@
 ## Classes
 
 - [DeferredIterable](#DeferredIterable)
-    - [DeferredIterable.callback](#DeferredIterable.callback)
-    - [DeferredIterable.iterable](#DeferredIterable.iterable)
-    - [DeferredIterable.finally](#DeferredIterable.finally)
-    - [DeferredIterable.value](#DeferredIterable.value)
-    - [DeferredIterable.finish](#DeferredIterable.finish)
+    - [DeferredIterable.callback](#DeferredIterablecallback)
+    - [DeferredIterable.iterable](#DeferredIterableiterable)
+    - [DeferredIterable.finally](#DeferredIterablefinally)
+    - [DeferredIterable.value](#DeferredIterablevalue)
+    - [DeferredIterable.finish](#DeferredIterablefinish)
 
 ## Functions
 
