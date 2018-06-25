@@ -29,7 +29,7 @@ for await (const click of clicks) {
 
 ## DeferredIterable
 
-```DeferredIterable``` makes it easy to turn stream of events into an interable. The code below
+```DeferredIterable``` makes it easy to turn stream of events into an iterable. The code below
 is essentially how ```fromEvents``` was implemented.
 
 ```javascript
