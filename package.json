@@ -1,9 +1,9 @@
 {
-  "name": "aix",
+  "name": "axax",
   "version": "0.0.15",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/jamiemccrindle/aix",
+    "url": "https://github.com/jamiemccrindle/axax",
     "type": "git"
   },
   "devDependencies": {

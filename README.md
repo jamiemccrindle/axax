@@ -4,9 +4,9 @@ A library of async iterator extensions for JavaScript
 
 # Installation
 
-    npm install aix # or yarn install aix
+    npm install axax # or yarn install axax
 
-# Why Aix?
+# Why Axax?
 
 Async iterators are a useful way to handle asynchronous streams. This library adds a number
 of utility methods similar to those found in lodash, underscore or Ramda.
@@ -18,7 +18,7 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 ```fromEvents``` turns DOM events into an iterable.
 
 ```javascript
-import { fromEvents } from "aix/fromEvents";
+import { fromEvents } from "axax/fromEvents";
 
 const clicks = fromEvents(document, 'click');
 
@@ -33,7 +33,7 @@ for await (const click of clicks) {
 is essentially how ```fromEvents``` was implemented.
 
 ```javascript
-import { DeferredIterable } from "aix/deferredIterable";
+import { DeferredIterable } from "axax/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 
@@ -54,4 +54,4 @@ for await (const click of deferredIterable.iterable) {
 
 # Reference Documentation
 
-* [API Reference](https://github.com/jamiemccrindle/aix/blob/master/docs/API.md)
+* [API Reference](https://github.com/jamiemccrindle/axax/blob/master/docs/API.md)
