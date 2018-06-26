@@ -1,4 +1,5 @@
-import { DeferredIterable, toCallbacks } from ".";
+import { DeferredIterable } from "./deferredIterable";
+import { toCallbacks } from "./toCallbacks";
 
 export function spanAll<T>(predicate: (t: T) => boolean) {
   return function inner(source: AsyncIterable<T>) {
