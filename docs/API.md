@@ -228,7 +228,7 @@ const merged = merge(
     of(1, 2), of(3, 4)
 );
 
-for await(const item of concatted) {
+for await(const item of merged) {
     console.log(item); // outputs 1, 2, 3, 4 in no particular order
 }
 ```
