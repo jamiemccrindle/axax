@@ -16,12 +16,13 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 Axax contains both transpiled es5 code as well as esnext code, the difference being that
 esnext uses the native for await syntax. In nodejs 10.x that gives approximately a 40% speedup.
 
-    // use es5
-    import { map } from "axax/es5/map"; 
+```javascript
+// use es5
+import { map } from "axax/es5/map"; 
 
-    // use esnext
-    import { map } from "axax/esnext/map"; 
-
+// use esnext
+import { map } from "axax/esnext/map"; 
+```
 
 # Examples
 
