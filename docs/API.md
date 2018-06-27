@@ -22,6 +22,8 @@
 - [tap](#tap)
 - [zip](#zip)
 - [range](#range)
+- [scan](#scan)
+- [flatten](#flatten)
 
 # Classes
 
@@ -306,3 +308,32 @@ for await(const item of ranged) {
 }
 ```
 
+## scan
+
+Similar to a reduce except that it outputs the accumulator as it goes.
+
+```javascript
+import { scan } from "axax/es5/scan";
+import { of } from "axax/es5/of";
+
+const scanned = scan((accumulator, value) => accumulator + value, 0)(of(1, 2, 3));
+
+for await(const item of scanned) {
+    console.log(item); // prints 0, 1, 3, 6
+}
+```
+
+## flatten
+
+Flattens an async iterable of async iterables.
+
+```javascript
+import { flatten } from "axax/es5/flatten";
+import { of } from "axax/es5/of";
+
+const flattened = flatten(of(of(1), of(2, 3)));
+
+for await(const item of flattened) {
+    console.log(item); // prints 1, 2, 3
+}
+```
