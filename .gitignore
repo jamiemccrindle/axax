@@ -1,3 +1,5 @@
 lib/
 node_modules/
+esnext/
+es5/
 *.log

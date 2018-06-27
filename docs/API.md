@@ -37,7 +37,7 @@ You typically interact with `DeferredIterable` in 2 ways:
 ### Example
 
 ```javascript
-import { DeferredIterable } from "axax/deferredIterable";
+import { DeferredIterable } from "axax/es5/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 
@@ -62,7 +62,7 @@ The callback to call to send a `IteratorResult` into the `DeferredIterable`. An 
 has a `done` boolean property and a `value` property.
 
 ```javascript
-import { DeferredIterable } from "axax/deferredIterable";
+import { DeferredIterable } from "axax/es5/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 deferredIterable.callback({ done: false, value: 1 });
@@ -80,7 +80,7 @@ for await (const item of deferredIterable.iterable) {
 An ```AsyncIterable``` that returns values supplied by calling ```callback```.
 
 ```javascript
-import { DeferredIterable } from "axax/deferredIterable";
+import { DeferredIterable } from "axax/es5/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 deferredIterable.callback({ done: false, value: 1 });
@@ -118,7 +118,7 @@ Construct a new async iterable from a series
 of values.
 
 ```javascript
-import { of } from "axax/of";
+import { of } from "axax/es5/of";
 
 const values = of(1, 2, 3);
 
@@ -133,8 +133,8 @@ Go through each item in the iterable and run a mapping function. The result will
 iterable with the transformed values.
 
 ```javascript
-import { map } from "axax/map";
-import { of } from "axax/of";
+import { map } from "axax/es5/map";
+import { of } from "axax/es5/of";
 
 const mapped = map(value => value * 2)(of(1, 2, 3));
 
@@ -149,8 +149,8 @@ Go through each item in the iterable and run a mapping function that returns an 
 result is then flattened.
 
 ```javascript
-import { flatMap } from "axax/flatMap";
-import { of } from "axax/of";
+import { flatMap } from "axax/es5/flatMap";
+import { of } from "axax/es5/of";
 
 const mapped = flatMap(
     async function* (value) {
@@ -169,8 +169,8 @@ for await(const item of mapped) {
 Filter an iterable based on some criteria.
 
 ```javascript
-import { filter } from "axax/filter";
-import { of } from "axax/of";
+import { filter } from "axax/es5/filter";
+import { of } from "axax/es5/of";
 
 const filtered = filter(
     value => value % 2 === 0
@@ -186,8 +186,8 @@ for await(const item of filtered) {
 Concatenate 2 iterables in order
 
 ```javascript
-import { concat } from "axax/concat";
-import { of } from "axax/of";
+import { concat } from "axax/es5/concat";
+import { of } from "axax/es5/of";
 
 const concatted = concat(
     of(1, 2)
@@ -205,8 +205,8 @@ reduced by a function that compbines a running total or accumulator with
 the next value to produce the new total or accumulator.
 
 ```javascript
-import { reduce } from "axax/reduce";
-import { of } from "axax/of";
+import { reduce } from "axax/es5/reduce";
+import { of } from "axax/es5/of";
 
 const reduced = concat(
     (accumulator, next) => accumulator + next, // sum the values together
@@ -221,8 +221,8 @@ console.log(reduced); // 6
 Merge a number of async iterators into one concurrently. Order is not important.
 
 ```javascript
-import { merge } from "axax/merge";
-import { of } from "axax/of";
+import { merge } from "axax/es5/merge";
+import { of } from "axax/es5/of";
 
 const merged = merge(
     of(1, 2), of(3, 4)
@@ -238,8 +238,8 @@ for await(const item of merged) {
 Insert values at the beginning of an async iterable.
 
 ```javascript
-import { insert } from "axax/insert";
-import { of } from "axax/of";
+import { insert } from "axax/es5/insert";
+import { of } from "axax/es5/of";
 
 const inserted = insert(
     1, 2, 3
@@ -258,8 +258,8 @@ result of the function. Typically used for side effects like
 logging.
 
 ```javascript
-import { tap } from "axax/tap";
-import { of } from "axax/of";
+import { tap } from "axax/es5/tap";
+import { of } from "axax/es5/of";
 
 const tapped = tap(
     value => console.log(value) // prints 1, 2, 3
@@ -275,8 +275,8 @@ for await(const item of concatted) {
 Creates a new iterable out of the two supplied by pairing up equally-positioned items from both iterables. The returned iterable is truncated to the length of the shorter of the two input iterables.
 
 ```javascript
-import { zip } from "axax/zip";
-import { of } from "axax/of";
+import { zip } from "axax/es5/zip";
+import { of } from "axax/es5/of";
 
 const zipped = zip(
     of(1, 2)
@@ -296,8 +296,8 @@ for await(const item of concatted) {
  then set to 0.
 
 ```javascript
-import { range } from "axax/range";
-import { of } from "axax/of";
+import { range } from "axax/es5/range";
+import { of } from "axax/es5/of";
 
 const ranged = range(1, 3);
 

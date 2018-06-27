@@ -16,8 +16,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc -p tsconfig.es5.json && tsc -p tsconfig.esnext.json"
   },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts"
+  "main": "es5/index.js",
+  "types": "es5/index.d.ts"
 }

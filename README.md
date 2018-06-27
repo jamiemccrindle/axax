@@ -11,6 +11,11 @@ A library of async iterator extensions for JavaScript
 Async iterators are a useful way to handle asynchronous streams. This library adds a number
 of utility methods similar to those found in lodash, underscore or Ramda.
 
+# es5 vs esnext
+
+Axax contains both transpiled es5 code as well as esnext code, the difference being that
+esnext uses the native for await syntax. In nodejs 10.x that gives approximately a 40% speedup.
+
 # Examples
 
 ## fromEvents
@@ -18,7 +23,7 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 ```fromEvents``` turns DOM events into an iterable.
 
 ```javascript
-import { fromEvents } from "axax/fromEvents";
+import { fromEvents } from "axax/es5/fromEvents";
 
 const clicks = fromEvents(document, 'click');
 
@@ -33,7 +38,7 @@ for await (const click of clicks) {
 is essentially how ```fromEvents``` was implemented.
 
 ```javascript
-import { DeferredIterable } from "axax/deferredIterable";
+import { DeferredIterable } from "axax/es5/deferredIterable";
 
 const deferredIterable = new DeferredIterable();
 
