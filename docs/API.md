@@ -14,7 +14,7 @@
 - [of](#of)
 - [map](#map)
 - [filter](#filter)
-- [flatMap](#flatMap)
+- [flatMap](#flatmap)
 - [concat](#concat)
 - [reduce](#reduce)
 - [merge](#merge)
@@ -122,7 +122,7 @@ import { of } from "axax/es5/of";
 
 const values = of(1, 2, 3);
 
-for await(const item of mapped) {
+for await(const item of values) {
     console.log(item); // outputs 1, 2, 3
 }
 ```
@@ -208,7 +208,7 @@ the next value to produce the new total or accumulator.
 import { reduce } from "axax/es5/reduce";
 import { of } from "axax/es5/of";
 
-const reduced = concat(
+const reduced = reduce(
     (accumulator, next) => accumulator + next, // sum the values together
     0
 )(of(1, 2, 3));
@@ -245,7 +245,7 @@ const inserted = insert(
     1, 2, 3
 )(of(4, 5, 6));
 
-for await(const item of concatted) {
+for await(const item of inserted) {
     console.log(item); // outputs 1, 2, 3, 4, 5, 6
 }
 ```
@@ -265,7 +265,7 @@ const tapped = tap(
     value => console.log(value) // prints 1, 2, 3
 )(of(1, 2, 3));
 
-for await(const item of concatted) {
+for await(const item of tapped) {
     console.log(item); // prints 1, 2, 3
 }
 ```
@@ -282,7 +282,7 @@ const zipped = zip(
     of(1, 2)
 )(of(1, 2));
 
-for await(const item of concatted) {
+for await(const item of zipped) {
     console.log(item); // prints [1, 1], [2, 2]
 }
 ```
@@ -301,7 +301,7 @@ import { of } from "axax/es5/of";
 
 const ranged = range(1, 3);
 
-for await(const item of concatted) {
+for await(const item of ranged) {
     console.log(item); // prints 1, 2
 }
 ```
