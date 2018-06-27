@@ -4,10 +4,10 @@
 
 - [DeferredIterable](#deferrediterable)
     - [DeferredIterable.callback](#deferrediterablecallback)
-    - [DeferredIterable.iterable](#deferrediterableiterable)
+    - [DeferredIterable.iterator](#deferrediterableiterator)
     - [DeferredIterable.finally](#deferrediterablefinally)
     - [DeferredIterable.value](#deferrediterablevalue)
-    - [DeferredIterable.finish](#deferrediterablefinish)
+    - [DeferredIterable.close](#deferrediterableclose)
 
 ## Functions
 
@@ -53,7 +53,7 @@ document.addEventListener('click', callback);
 deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
 
 // go through all the click events
-for await (const click of deferredIterable.iterable) {
+for await (const click of deferredIterable.iterator) {
     console.log('a button was clicked');
 }
 ```
@@ -72,7 +72,7 @@ deferredIterable.callback({ done: false, value: 2 });
 deferredIterable.callback({ done: false, value: 3 });
 deferredIterable.callback({ done: true });
 
-for await (const item of deferredIterable.iterable) {
+for await (const item of deferredIterable.iterator) {
     console.log(item); // prints 1, 2, 3
 }
 ```
@@ -106,10 +106,10 @@ A helper method to pass a value to the DeferredIterable. Calling
 ```deferredIterable.value('test')``` is the same as calling 
 ```deferredIterable.callback({ done: false, value: 'test'} )```.
 
-### DeferredIterable.finish
+### DeferredIterable.close
 
 A helper method to signal the last value to DeferredIterable. Calling
-```deferredIterable.finish()``` is the same as calling 
+```deferredIterable.close()``` is the same as calling 
 ```deferredIterable.callback({ done: true} )```.
 
 # Functions

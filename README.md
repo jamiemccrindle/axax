@@ -62,7 +62,7 @@ document.addEventListener('click', callback);
 deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
 
 // go through all the click events
-for await (const click of deferredIterable.iterable) {
+for await (const click of deferredIterable.iterator) {
     console.log('a button was clicked');
 }
 ```
