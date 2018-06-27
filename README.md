@@ -14,7 +14,7 @@ of utility methods similar to those found in lodash, underscore or Ramda.
 ## es5 vs esnext
 
 Axax contains both transpiled es5 code as well as esnext code, the difference being that
-esnext uses the native for await syntax. In nodejs 10.x that gives approximately a 40% speedup.
+esnext uses the native ```for await``` syntax. In nodejs 10.x that gives approximately a 40% speedup.
 
 ```javascript
 // use es5
