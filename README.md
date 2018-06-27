@@ -4,7 +4,7 @@ A library of async iterator extensions for JavaScript
 
 # Installation
 
-    npm install axax # or yarn install axax
+    npm install axax # or yarn add axax
 
 # Why Axax?
 
