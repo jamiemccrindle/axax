@@ -24,6 +24,7 @@
 - [range](#range)
 - [scan](#scan)
 - [flatten](#flatten)
+- [pipe](#pipe)
 
 # Classes
 
@@ -321,6 +322,7 @@ const scanned = scan((accumulator, value) => accumulator + value, 0)(of(1, 2, 3)
 for await(const item of scanned) {
     console.log(item); // prints 0, 1, 3, 6
 }
+
 ```
 
 ## flatten
@@ -335,5 +337,27 @@ const flattened = flatten(of(of(1), of(2, 3)));
 
 for await(const item of flattened) {
     console.log(item); // prints 1, 2, 3
+}
+```
+
+```
+
+## pipe
+
+Pipe together a number of axax operators to use on a source async iterator.
+Operators are applied left to right
+
+```javascript
+import { filter } from "axax/es5/filter";
+import { map } from "axax/es5/map";
+import { of } from "axax/es5/of";
+
+const piped = pipe(
+    filter(value => value % 2 === 0),
+    map(value => value * 2))
+(of(1, 2, 3, 4));
+
+for await(const item of piped) {
+    console.log(item); // prints 4, 8
 }
 ```
