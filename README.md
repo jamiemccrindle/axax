@@ -19,10 +19,10 @@ Axax contains both transpiled es5 code as well as esnext code, the difference be
 esnext uses the native ```for await``` syntax. In nodejs 10.x that gives approximately a 40% speedup.
 
 ```javascript
-// use es5
+// use es5 if you want to support more browsers
 import { map } from "axax/es5/map"; 
 
-// use esnext
+// use esnext if you're only using node 10.x or supporting very new browsers
 import { map } from "axax/esnext/map"; 
 ```
 
