@@ -340,8 +340,6 @@ for await(const item of flattened) {
 }
 ```
 
-```
-
 ## pipe
 
 Pipe together a number of axax operators to use on a source async iterator.
