@@ -193,7 +193,7 @@ import { of } from "axax/es5/of";
 
 const concatted = concat(
     of(1, 2)
-)(of(3, 4);
+)(of(3, 4));
 
 for await(const item of concatted) {
     console.log(item); // outputs 1, 2, 3, 4
