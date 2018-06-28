@@ -347,6 +347,7 @@ Operators are applied left to right
 
 ```javascript
 import { filter } from "axax/es5/filter";
+import { pipe } from "axax/es5/pipe";
 import { map } from "axax/es5/map";
 import { of } from "axax/es5/of";
 
