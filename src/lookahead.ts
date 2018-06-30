@@ -1,5 +1,5 @@
-import { iteratorToIterable } from "./iteratorToIterable";
 import { insert } from "./insert";
+import { iteratorToIterable } from "./iteratorToIterable";
 
 /**
  * Lookahead into the async iteratable
@@ -9,19 +9,18 @@ import { insert } from "./insert";
  */
 export function lookahead<T>(howFar: number) {
   return async function inner(
-    source: AsyncIterable<T>
-  ): Promise<{ values: Array<T>; iterable: AsyncIterable<T> }> {
+    source: AsyncIterable<T>,
+  ): Promise<{ values: T[]; iterable: AsyncIterable<T> }> {
     const iterator = source[Symbol.asyncIterator]();
-    const values: Array<T> = [];
+    const values: T[] = [];
     for (let i = 0; i < howFar; i++) {
       const next = await iterator.next();
-      if (next.done) break;
+      if (next.done) { break; }
       values.push(next.value);
     }
     return {
+      iterable: insert(...values)(iteratorToIterable(iterator)),
       values,
-      iterable: insert(...values)(iteratorToIterable(iterator))
     };
   };
 }
-

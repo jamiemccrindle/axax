@@ -10,7 +10,7 @@ export function interval<T>(
   const subject = new Subject<number>();
   let counter = 0;
   async function inner() {
-    if (!subject.done) {
+    if (!subject.isDone()) {
       await subject.onNext(counter++);
       (timeout || setTimeout)(inner, period);
     }

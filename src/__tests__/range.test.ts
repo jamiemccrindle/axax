@@ -1,5 +1,5 @@
-import { toArray } from "../toArray";
 import { range } from "../range";
+import { toArray } from "../toArray";
 
 test("range", async () => {
   const result = await toArray(

@@ -1,6 +1,6 @@
+import { filter } from "../filter";
 import { of } from "../of";
 import { toArray } from "../toArray";
-import { filter } from "../filter";
 
 test("filter", async () => {
   const result = await toArray(

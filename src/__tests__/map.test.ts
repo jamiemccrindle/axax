@@ -1,6 +1,6 @@
+import { map } from "../map";
 import { of } from "../of";
 import { toArray } from "../toArray";
-import { map } from "../map";
 
 test("map", async () => {
   const result = await toArray(

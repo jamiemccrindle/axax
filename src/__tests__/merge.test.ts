@@ -1,5 +1,5 @@
-import { of } from "../of";
 import { merge } from "../merge";
+import { of } from "../of";
 import { toArray } from "../toArray";
 
 test("merge", async () => {

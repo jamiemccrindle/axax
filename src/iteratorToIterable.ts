@@ -6,7 +6,7 @@
 export async function* iteratorToIterable<T>(iterator: AsyncIterator<T>) {
   while (true) {
     const next = await iterator.next();
-    if (next.done) return;
+    if (next.done) { return; }
     yield next.value;
   }
 }

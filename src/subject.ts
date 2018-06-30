@@ -4,19 +4,19 @@ import { Deferred } from "./deferred";
  * The async iterator equivalent of a deferred
  */
 export class Subject<T> {
-  doneValue = {
+  public iterator: AsyncIterableIterator<T>;
+
+  private doneValue = {
     done: true,
     value: {} as T
   };
 
-  queue: IteratorResult<T>[] = [];
-  deferreds: Deferred<IteratorResult<T>>[] = [];
-  iterator: AsyncIterableIterator<T>;
-  done: boolean = false;
-  noMoreResults: boolean = false;
-  backPressureDeferred = new Deferred<void>();
-
-  finallyCallbacks: (() => void)[] = [];
+  private queue: Array<IteratorResult<T>> = [];
+  private deferreds: Array<Deferred<IteratorResult<T>>> = [];
+  private done: boolean = false;
+  private noMoreResults: boolean = false;
+  private backPressureDeferred = new Deferred<void>();
+  private finallyCallbacks: Array<() => void> = [];
 
   constructor() {
     const self = this;
@@ -24,7 +24,7 @@ export class Subject<T> {
     this.iterator = {
       throw(e?: any) {
         self.done = true;
-        self.finallyCallbacks.map(cb => cb());
+        self.finallyCallbacks.map((cb) => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.reject(e);
@@ -33,7 +33,7 @@ export class Subject<T> {
       },
       return(value?: any) {
         self.done = true;
-        self.finallyCallbacks.map(cb => cb());
+        self.finallyCallbacks.map((cb) => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.resolve({
@@ -73,28 +73,32 @@ export class Subject<T> {
     };
   }
 
-  finally(callback: () => void) {
+  public finally(callback: () => void) {
     this.finallyCallbacks.push(callback);
   }
 
-  onCompleted() {
+  public onCompleted() {
     return this.callback({ done: true, value: {} as T });
   }
 
-  onNext(value: T) {
+  public onNext(value: T) {
     return this.callback({ done: false, value });
   }
 
-  callback(result: IteratorResult<T>) {
+  public isDone() {
+    return this.done;
+  }
+
+  public callback(result: IteratorResult<T>) {
     if (!(this && this instanceof Subject)) {
-      const errorMessage =
-        "This must be a Subject. Have you bound this?";
+      const errorMessage = "This must be a Subject. Have you bound this?";
+      // tslint:disable-next-line:no-console
       console.log(errorMessage);
       throw new Error(errorMessage);
     }
     if (result.done) {
-      for (const deferred of this.deferreds) {
-        deferred.resolve(result);
+      for (const queuedDeferred of this.deferreds) {
+        queuedDeferred.resolve(result);
       }
       this.noMoreResults = true;
       return Promise.resolve();

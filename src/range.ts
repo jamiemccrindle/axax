@@ -8,7 +8,7 @@
 export async function* range(
   startOrEnd: number,
   end: number,
-  step: number = 1
+  step: number = 1,
 ) {
   let actualStart: number;
   let actualEnd: number;

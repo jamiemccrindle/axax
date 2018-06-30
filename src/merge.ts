@@ -6,13 +6,10 @@ import { toCallbacks } from "./toCallbacks";
  *
  * @param sources the iterables to merge
  */
-export function merge<T>(...sources: AsyncIterable<T>[]) {
+export function merge<T>(...sources: Array<AsyncIterable<T>>) {
   const subject = new Subject<T>();
   sources.map(source => {
-    return toCallbacks(
-      source,
-      subject.callback.bind(subject)
-    );
+    return toCallbacks(source, subject.callback.bind(subject));
   });
   return subject.iterator;
 }

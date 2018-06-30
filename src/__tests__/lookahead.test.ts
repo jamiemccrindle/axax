@@ -1,5 +1,5 @@
-import { restToIterable } from "../restToIterable";
 import { lookahead } from "../lookahead";
+import { restToIterable } from "../restToIterable";
 import { toArray } from "../toArray";
 
 test("lookahead", async () => {

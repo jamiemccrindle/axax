@@ -1,11 +1,11 @@
 import { Subject} from "./subject";
 
-export interface EventSource<T> {
+export interface IEventSource<T> {
   addEventListener: (type: string, callback: (event: T) => void) => void;
   removeEventListener: (type: string, callback: any) => void;
 }
 
-export function fromEvent<T>(source: EventSource<T>, type: string) {
+export function fromEvent<T>(source: IEventSource<T>, type: string) {
   const subject = new Subject<T>();
   const callback = (event: T) => {
     subject.onNext(event);

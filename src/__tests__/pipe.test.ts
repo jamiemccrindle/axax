@@ -1,8 +1,8 @@
-import { of } from "../of";
-import { toArray } from "../toArray";
 import { flatten } from "../flatten";
-import { pipe } from "../pipe";
 import { map } from "../map";
+import { of } from "../of";
+import { pipe } from "../pipe";
+import { toArray } from "../toArray";
 
 test("pipe", async () => {
   const result = await toArray(

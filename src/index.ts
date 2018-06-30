@@ -14,3 +14,6 @@ export { filter } from "./filter";
 export { concat } from "./concat";
 export { fromEvent } from "./fromEvent";
 export { tap } from "./tap";
+export { pipe } from "./pipe";
+export { flatten } from "./flatten";
+export { concurrentMap } from "./concurrentMap";

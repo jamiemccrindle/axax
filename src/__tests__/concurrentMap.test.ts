@@ -1,6 +1,6 @@
+import { concurrentMap } from "../concurrentMap";
 import { of } from "../of";
 import { toArray } from "../toArray";
-import { concurrentMap } from "../concurrentMap";
 
 test("concurrentMap", async () => {
   const result = await toArray(

@@ -1,5 +1,5 @@
-import { of } from "../of";
 import { flatMap } from "../flatMap";
+import { of } from "../of";
 import { toArray } from "../toArray";
 
 test("flatMap", async () => {
