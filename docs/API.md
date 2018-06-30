@@ -18,6 +18,7 @@
 - [flatten](#flatten)
 - [pipe](#pipe)
 - [fromEvent](#fromevent)
+- [interval](#interval)
 
 ## Classes
 
@@ -286,6 +287,22 @@ const clicks = fromEvent(document, 'click');
 
 for await (const click of clicks) {
     console.log('a button was clicked');
+}
+```
+
+## interval
+
+Keep returning an incrementing number with a fixed delay between
+each number.
+
+```javascript
+import { interval } from "axax/es5/interval";
+
+for await (const item of interval(1000)) {
+    console.log(item); // will output 0 to 10
+    if(item >= 10) {
+        break;         // stop the iterable
+    }
 }
 ```
 
