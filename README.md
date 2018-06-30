@@ -7,7 +7,7 @@ A library of async iterator extensions for JavaScript including ```map```, ```re
 # Installation
 
 ```bash
-npm install axax # or yarn install axax
+npm install axax # or yarn add axax
 ```
 
 # Why Axax?
