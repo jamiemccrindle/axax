@@ -72,7 +72,7 @@ import { map } from "axax/es5/map";
 import { of } from "axax/es5/of";
 
 const mapped = concurrentMap(
-    async (value) => value * 2, // asybc mapping function
+    async (value) => value * 2, // async mapping function
     2                           // run 2 concurrently
 )(of(1, 2, 3));
 
