@@ -1,14 +1,5 @@
 # Axax API Reference
 
-## Classes
-
-- [DeferredIterable](#deferrediterable)
-    - [DeferredIterable.callback](#deferrediterablecallback)
-    - [DeferredIterable.iterator](#deferrediterableiterator)
-    - [DeferredIterable.finally](#deferrediterablefinally)
-    - [DeferredIterable.value](#deferrediterablevalue)
-    - [DeferredIterable.close](#deferrediterableclose)
-
 ## Functions
 
 - [of](#of)
@@ -26,92 +17,14 @@
 - [flatten](#flatten)
 - [pipe](#pipe)
 
-# Classes
+## Classes
 
-## DeferredIterable
-
-`DeferredIterable` makes it easy to turn stream of events into an interable.
-
-You typically interact with `DeferredIterable` in 2 ways:
-
-- To send data into the `DeferredIterable` call the `callback` function to send an `IteratorResult`
-- To read data from the `DeferredIterable` use the `iterable` property.
-
-### Example
-
-```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
-
-const deferredIterable = new DeferredIterable();
-
-// set up a callback that calls value on the deferredIterable
-const callback = value => deferredIterable.value(value);
-
-// attach the callback to the click event
-document.addEventListener('click', callback);
-
-// remove the callback when / if the iterable stops
-deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
-
-// go through all the click events
-for await (const click of deferredIterable.iterator) {
-    console.log('a button was clicked');
-}
-```
-
-### DeferredIterable.callback
-
-The callback to call to send a `IteratorResult` into the `DeferredIterable`. An `IteratorResult`
-has a `done` boolean property and a `value` property.
-
-```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
-
-const deferredIterable = new DeferredIterable();
-deferredIterable.callback({ done: false, value: 1 });
-deferredIterable.callback({ done: false, value: 2 });
-deferredIterable.callback({ done: false, value: 3 });
-deferredIterable.callback({ done: true });
-
-for await (const item of deferredIterable.iterator) {
-    console.log(item); // prints 1, 2, 3
-}
-```
-
-### DeferredIterable.iterable
-
-An ```AsyncIterable``` that returns values supplied by calling ```callback```.
-
-```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
-
-const deferredIterable = new DeferredIterable();
-deferredIterable.callback({ done: false, value: 1 });
-deferredIterable.callback({ done: false, value: 2 });
-deferredIterable.callback({ done: false, value: 3 });
-deferredIterable.callback({ done: true });
-
-for await (const item of deferredIterable.iterable) {
-    console.log(item); // prints 1, 2, 3
-}
-```
-
-### DeferredIterable.finally
-
-The callback supplied to ```finally``` is called when the iterable finishes either 
-because it's run out of values, it has returned or an error was thrown.
-
-### DeferredIterable.value
-
-A helper method to pass a value to the DeferredIterable. Calling
-```deferredIterable.value('test')``` is the same as calling 
-```deferredIterable.callback({ done: false, value: 'test'} )```.
-
-### DeferredIterable.close
-
-A helper method to signal the last value to DeferredIterable. Calling
-```deferredIterable.close()``` is the same as calling 
-```deferredIterable.callback({ done: true} )```.
+- [DeferredIterable](#deferrediterable)
+    - [DeferredIterable.callback](#deferrediterablecallback)
+    - [DeferredIterable.iterator](#deferrediterableiterator)
+    - [DeferredIterable.finally](#deferrediterablefinally)
+    - [DeferredIterable.value](#deferrediterablevalue)
+    - [DeferredIterable.close](#deferrediterableclose)
 
 # Functions
 
@@ -360,3 +273,91 @@ for await(const item of piped) {
     console.log(item); // prints 4, 8
 }
 ```
+
+# Classes
+
+## DeferredIterable
+
+`DeferredIterable` makes it easy to turn stream of events into an interable.
+
+You typically interact with `DeferredIterable` in 2 ways:
+
+- To send data into the `DeferredIterable` call the `callback` function to send an `IteratorResult`
+- To read data from the `DeferredIterable` use the `iterable` property.
+
+### Example
+
+```javascript
+import { DeferredIterable } from "axax/es5/deferredIterable";
+
+const deferredIterable = new DeferredIterable();
+
+// set up a callback that calls value on the deferredIterable
+const callback = value => deferredIterable.value(value);
+
+// attach the callback to the click event
+document.addEventListener('click', callback);
+
+// remove the callback when / if the iterable stops
+deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
+
+// go through all the click events
+for await (const click of deferredIterable.iterator) {
+    console.log('a button was clicked');
+}
+```
+
+### DeferredIterable.callback
+
+The callback to call to send a `IteratorResult` into the `DeferredIterable`. An `IteratorResult`
+has a `done` boolean property and a `value` property.
+
+```javascript
+import { DeferredIterable } from "axax/es5/deferredIterable";
+
+const deferredIterable = new DeferredIterable();
+deferredIterable.callback({ done: false, value: 1 });
+deferredIterable.callback({ done: false, value: 2 });
+deferredIterable.callback({ done: false, value: 3 });
+deferredIterable.callback({ done: true });
+
+for await (const item of deferredIterable.iterator) {
+    console.log(item); // prints 1, 2, 3
+}
+```
+
+### DeferredIterable.iterable
+
+An ```AsyncIterable``` that returns values supplied by calling ```callback```.
+
+```javascript
+import { DeferredIterable } from "axax/es5/deferredIterable";
+
+const deferredIterable = new DeferredIterable();
+deferredIterable.callback({ done: false, value: 1 });
+deferredIterable.callback({ done: false, value: 2 });
+deferredIterable.callback({ done: false, value: 3 });
+deferredIterable.callback({ done: true });
+
+for await (const item of deferredIterable.iterable) {
+    console.log(item); // prints 1, 2, 3
+}
+```
+
+### DeferredIterable.finally
+
+The callback supplied to ```finally``` is called when the iterable finishes either 
+because it's run out of values, it has returned or an error was thrown.
+
+### DeferredIterable.value
+
+A helper method to pass a value to the DeferredIterable. Calling
+```deferredIterable.value('test')``` is the same as calling 
+```deferredIterable.callback({ done: false, value: 'test'} )```.
+
+### DeferredIterable.close
+
+A helper method to signal the last value to DeferredIterable. Calling
+```deferredIterable.close()``` is the same as calling 
+```deferredIterable.callback({ done: true} )```.
+
