@@ -333,9 +333,10 @@ for await(const item of piped) {
 
 `Subject` makes it easy to turn stream of events into an interable.
 
-You typically interact with `Subject` in 2 ways:
+You typically interact with `Subject` in 3 ways:
 
-- To send data into the `Subject` call the `callback` function to send an `IteratorResult`
+- To send data into the `Subject` call the `onNext` function with a value
+- To complete sending data, call `onComplete`
 - To read data from the `Subject` use the `iterable` property.
 
 ### Example
