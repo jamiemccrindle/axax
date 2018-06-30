@@ -19,15 +19,17 @@
 - [pipe](#pipe)
 - [fromEvent](#fromevent)
 - [interval](#interval)
+- [sum](#sum)
+- [count](#count)
 
 ## Classes
 
 - [Subject](#subject)
-    - [Subject.callback](#subjectcallback)
-    - [Subject.iterator](#subjectiterator)
-    - [Subject.finally](#subjectfinally)
-    - [Subject.onNext](#subjectonnext)
-    - [Subject.onCompleted](#subjectoncompleted)
+  - [Subject.callback](#subjectcallback)
+  - [Subject.iterator](#subjectiterator)
+  - [Subject.finally](#subjectfinally)
+  - [Subject.onNext](#subjectonnext)
+  - [Subject.onCompleted](#subjectoncompleted)
 
 # Functions
 
@@ -65,7 +67,7 @@ for await(const item of mapped) {
 ## concurrentMap
 
 Concurrently go through each item in the iterable and run a mapping function.
-The mapping function must return a promise. The result will be a new iterable with 
+The mapping function must return a promise. The result will be a new iterable with
 the transformed values.
 
 ```javascript
@@ -148,8 +150,8 @@ import { reduce } from "axax/es5/reduce";
 import { of } from "axax/es5/of";
 
 const reduced = reduce(
-    (accumulator, next) => accumulator + next, // sum the values together
-    0
+  (accumulator, next) => accumulator + next, // sum the values together
+  0
 )(of(1, 2, 3));
 
 console.log(reduced); // 6
@@ -192,7 +194,7 @@ for await(const item of inserted) {
 ## tap
 
 'Taps' an async iterable. Allows you to run a function for
-every item in the iterable but doesn't do anything with the 
+every item in the iterable but doesn't do anything with the
 result of the function. Typically used for side effects like
 logging.
 
@@ -228,11 +230,11 @@ for await(const item of zipped) {
 
 ## range
 
- Creates an iterable of numbers (positive and/or negative)
- progressing from start up to, but not including, end. A step
- of -1 is used if a negative start is specified without an end
- or step. If end is not specified, it's set to start with start
- then set to 0.
+Creates an iterable of numbers (positive and/or negative)
+progressing from start up to, but not including, end. A step
+of -1 is used if a negative start is specified without an end
+or step. If end is not specified, it's set to start with start
+then set to 0.
 
 ```javascript
 import { range } from "axax/es5/range";
@@ -258,7 +260,6 @@ const scanned = scan((accumulator, value) => accumulator + value, 0)(of(1, 2, 3)
 for await(const item of scanned) {
     console.log(item); // prints 0, 1, 3, 6
 }
-
 ```
 
 ## flatten
@@ -278,7 +279,7 @@ for await(const item of flattened) {
 
 ## fromEvent
 
-```fromEvents``` turns DOM events into an iterable.
+`fromEvents` turns DOM events into an iterable.
 
 ```javascript
 import { fromEvent } from "axax/es5/fromEvent";
@@ -325,6 +326,30 @@ const piped = pipe(
 for await(const item of piped) {
     console.log(item); // prints 4, 8
 }
+```
+
+## sum
+
+Sum the values returned by an async iterator
+
+```javascript
+import { sum } from "axax/es5/sum";
+import { of } from "axax/es5/of";
+
+const summed = await sum(of(1, 2, 3, 4));
+console.log(summed); // outputs 10
+
+```
+## count
+
+Counts the values returned by an async iterator
+
+```javascript
+import { count } from "axax/es5/count";
+import { of } from "axax/es5/of";
+
+const counted = await count(of(1, 2, 3, 4));
+console.log(counted); // outputs 4
 ```
 
 # Classes
@@ -382,7 +407,7 @@ for await (const item of subject.iterator) {
 
 ### Subject.iterable
 
-An ```AsyncIterable``` that returns values supplied by calling ```callback```.
+An `AsyncIterable` that returns values supplied by calling `callback`.
 
 ```javascript
 import { Subject } from "axax/es5/subject";
@@ -400,18 +425,17 @@ for await (const item of subject.iterable) {
 
 ### Subject.finally
 
-The callback supplied to ```finally``` is called when the iterable finishes either 
+The callback supplied to `finally` is called when the iterable finishes either
 because it's run out of values, it has returned or an error was thrown.
 
 ### Subject.onNext
 
 A helper method to pass a value to the Subject. Calling
-```subject.onNext('test')``` is the same as calling 
-```subject.callback({ done: false, value: 'test'} )```.
+`subject.onNext('test')` is the same as calling
+`subject.callback({ done: false, value: 'test'} )`.
 
 ### Subject.onCompleted
 
 A helper method to signal the last value to Subject. Calling
-```subject.onCompleted()``` is the same as calling 
-```subject.callback({ done: true} )```.
-
+`subject.onCompleted()` is the same as calling
+`subject.callback({ done: true} )`.

@@ -44,6 +44,23 @@ for await (const click of clicks) {
 }
 ```
 
+## fromLineReader
+
+```fromLineReader``` turns a NodeJS LineReader into an async iterable.
+
+```javascript
+import fs from "fs";
+import readline from "readline";
+import { fromLineReader } from "axax/esnext/fromLineReader";
+
+const lineReader = readline.createInterface({
+    input: fs.createReadStream("./data.txt"),
+});
+for await (const line of fromLineReader(lineReader)) {
+    console.log(line); // prints the lines from the file
+}
+```
+
 ## Subject
 
 ```Subject``` makes it easy to turn stream of events into an iterable. The code below
