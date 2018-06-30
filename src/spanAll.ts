@@ -1,23 +1,23 @@
-import { DeferredIterable } from "./deferredIterable";
+import { Subject } from "./subject";
 import { toCallbacks } from "./toCallbacks";
 
 export function spanAll<T>(predicate: (t: T) => boolean) {
   return function inner(source: AsyncIterable<T>) {
-    const spanDeferredIterable = new DeferredIterable<AsyncIterable<T>>();
-    let currentDeferredIterable = new DeferredIterable<T>();
-    spanDeferredIterable.value(currentDeferredIterable.iterator);
+    const spanDeferredIterable = new Subject<AsyncIterable<T>>();
+    let currentDeferredIterable = new Subject<T>();
+    spanDeferredIterable.onNext(currentDeferredIterable.iterator);
     toCallbacks(source, result => {
       if (result.done) {
-        currentDeferredIterable.close();
-        spanDeferredIterable.close();
+        currentDeferredIterable.onCompleted();
+        spanDeferredIterable.onCompleted();
         return Promise.resolve();
       }
       if (predicate(result.value)) {
-        currentDeferredIterable.close();
-        currentDeferredIterable = new DeferredIterable<T>();
-        spanDeferredIterable.value(currentDeferredIterable.iterator);
+        currentDeferredIterable.onCompleted();
+        currentDeferredIterable = new Subject<T>();
+        spanDeferredIterable.onNext(currentDeferredIterable.iterator);
       } else {
-        currentDeferredIterable.value(result.value);
+        currentDeferredIterable.onNext(result.value);
       }
       // not handling back pressure at the moment
       return Promise.resolve();

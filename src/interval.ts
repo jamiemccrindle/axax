@@ -1,4 +1,4 @@
-import { DeferredIterable } from "./deferredIterable";
+import { Subject } from "./subject";
 
 /**
  * Emit numbers in sequence
@@ -7,14 +7,14 @@ export function interval<T>(
   period: number,
   timeout?: ((callback: () => void, delay: number) => void)
 ) {
-  const deferredIterable = new DeferredIterable<number>();
+  const subject = new Subject<number>();
   let counter = 0;
   async function inner() {
-    if (!deferredIterable.done) {
-      await deferredIterable.value(counter++);
+    if (!subject.done) {
+      await subject.onNext(counter++);
       (timeout || setTimeout)(inner, period);
     }
   }
   inner();
-  return deferredIterable.iterator;
+  return subject.iterator;
 }
