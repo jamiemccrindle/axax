@@ -9,7 +9,7 @@ test("spanAll", async () => {
   for await (const iterable of iterables) {
     const innerResult = [];
     for await (const item of iterable) {
-      innerResult.push(item)
+      innerResult.push(item);
     }
     result.push(innerResult);
   }
