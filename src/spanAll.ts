@@ -1,10 +1,10 @@
-import { DeferredIterable } from "./deferredIterable";
+import { Subject } from "./subject";
 import { toCallbacks } from "./toCallbacks";
 
 export function spanAll<T>(predicate: (t: T) => boolean) {
   return function inner(source: AsyncIterable<T>) {
-    const spanDeferredIterable = new DeferredIterable<AsyncIterable<T>>();
-    let currentDeferredIterable = new DeferredIterable<T>();
+    const spanDeferredIterable = new Subject<AsyncIterable<T>>();
+    let currentDeferredIterable = new Subject<T>();
     spanDeferredIterable.value(currentDeferredIterable.iterator);
     toCallbacks(source, result => {
       if (result.done) {
@@ -14,7 +14,7 @@ export function spanAll<T>(predicate: (t: T) => boolean) {
       }
       if (predicate(result.value)) {
         currentDeferredIterable.close();
-        currentDeferredIterable = new DeferredIterable<T>();
+        currentDeferredIterable = new Subject<T>();
         spanDeferredIterable.value(currentDeferredIterable.iterator);
       } else {
         currentDeferredIterable.value(result.value);

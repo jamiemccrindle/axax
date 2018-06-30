@@ -19,12 +19,12 @@
 
 ## Classes
 
-- [DeferredIterable](#deferrediterable)
-    - [DeferredIterable.callback](#deferrediterablecallback)
-    - [DeferredIterable.iterator](#deferrediterableiterator)
-    - [DeferredIterable.finally](#deferrediterablefinally)
-    - [DeferredIterable.value](#deferrediterablevalue)
-    - [DeferredIterable.close](#deferrediterableclose)
+- [Subject](#deferrediterable)
+    - [Subject.callback](#deferrediterablecallback)
+    - [Subject.iterator](#deferrediterableiterator)
+    - [Subject.finally](#deferrediterablefinally)
+    - [Subject.value](#deferrediterablevalue)
+    - [Subject.close](#deferrediterableclose)
 
 # Functions
 
@@ -276,88 +276,88 @@ for await(const item of piped) {
 
 # Classes
 
-## DeferredIterable
+## Subject
 
-`DeferredIterable` makes it easy to turn stream of events into an interable.
+`Subject` makes it easy to turn stream of events into an interable.
 
-You typically interact with `DeferredIterable` in 2 ways:
+You typically interact with `Subject` in 2 ways:
 
-- To send data into the `DeferredIterable` call the `callback` function to send an `IteratorResult`
-- To read data from the `DeferredIterable` use the `iterable` property.
+- To send data into the `Subject` call the `callback` function to send an `IteratorResult`
+- To read data from the `Subject` use the `iterable` property.
 
 ### Example
 
 ```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
+import { Subject } from "axax/es5/subject";
 
-const deferredIterable = new DeferredIterable();
+const subject = new Subject();
 
-// set up a callback that calls value on the deferredIterable
-const callback = value => deferredIterable.value(value);
+// set up a callback that calls value on the subject
+const callback = value => subject.value(value);
 
 // attach the callback to the click event
 document.addEventListener('click', callback);
 
 // remove the callback when / if the iterable stops
-deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
+subject.finally(() => document.removeEventListener('click', subject.value));
 
 // go through all the click events
-for await (const click of deferredIterable.iterator) {
+for await (const click of subject.iterator) {
     console.log('a button was clicked');
 }
 ```
 
-### DeferredIterable.callback
+### Subject.callback
 
-The callback to call to send a `IteratorResult` into the `DeferredIterable`. An `IteratorResult`
+The callback to call to send a `IteratorResult` into the `Subject`. An `IteratorResult`
 has a `done` boolean property and a `value` property.
 
 ```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
+import { Subject } from "axax/es5/subject";
 
-const deferredIterable = new DeferredIterable();
-deferredIterable.callback({ done: false, value: 1 });
-deferredIterable.callback({ done: false, value: 2 });
-deferredIterable.callback({ done: false, value: 3 });
-deferredIterable.callback({ done: true });
+const subject = new Subject();
+subject.callback({ done: false, value: 1 });
+subject.callback({ done: false, value: 2 });
+subject.callback({ done: false, value: 3 });
+subject.callback({ done: true });
 
-for await (const item of deferredIterable.iterator) {
+for await (const item of subject.iterator) {
     console.log(item); // prints 1, 2, 3
 }
 ```
 
-### DeferredIterable.iterable
+### Subject.iterable
 
 An ```AsyncIterable``` that returns values supplied by calling ```callback```.
 
 ```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
+import { Subject } from "axax/es5/subject";
 
-const deferredIterable = new DeferredIterable();
-deferredIterable.callback({ done: false, value: 1 });
-deferredIterable.callback({ done: false, value: 2 });
-deferredIterable.callback({ done: false, value: 3 });
-deferredIterable.callback({ done: true });
+const subject = new Subject();
+subject.callback({ done: false, value: 1 });
+subject.callback({ done: false, value: 2 });
+subject.callback({ done: false, value: 3 });
+subject.callback({ done: true });
 
-for await (const item of deferredIterable.iterable) {
+for await (const item of subject.iterable) {
     console.log(item); // prints 1, 2, 3
 }
 ```
 
-### DeferredIterable.finally
+### Subject.finally
 
 The callback supplied to ```finally``` is called when the iterable finishes either 
 because it's run out of values, it has returned or an error was thrown.
 
-### DeferredIterable.value
+### Subject.value
 
-A helper method to pass a value to the DeferredIterable. Calling
-```deferredIterable.value('test')``` is the same as calling 
-```deferredIterable.callback({ done: false, value: 'test'} )```.
+A helper method to pass a value to the Subject. Calling
+```subject.value('test')``` is the same as calling 
+```subject.callback({ done: false, value: 'test'} )```.
 
-### DeferredIterable.close
+### Subject.close
 
-A helper method to signal the last value to DeferredIterable. Calling
-```deferredIterable.close()``` is the same as calling 
-```deferredIterable.callback({ done: true} )```.
+A helper method to signal the last value to Subject. Calling
+```subject.close()``` is the same as calling 
+```subject.callback({ done: true} )```.
 

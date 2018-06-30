@@ -1,4 +1,4 @@
-import { DeferredIterable} from "./deferredIterable";
+import { Subject} from "./subject";
 
 export interface EventSource<T> {
   addEventListener: (type: string, callback: (event: T) => void) => void;
@@ -6,11 +6,11 @@ export interface EventSource<T> {
 }
 
 export function fromEvent<T>(source: EventSource<T>, type: string) {
-  const deferredIterable = new DeferredIterable<T>();
+  const subject = new Subject<T>();
   const callback = (event: T) => {
-    deferredIterable.value(event);
+    subject.value(event);
   };
   source.addEventListener(type, callback);
-  deferredIterable.finally(() => source.removeEventListener(type, callback));
-  return deferredIterable.iterator;
+  subject.finally(() => source.removeEventListener(type, callback));
+  return subject.iterator;
 }

@@ -1,7 +1,7 @@
-import { DeferredIterable } from "../deferredIterable";
+import { Subject } from "../subject";
 
-test("DeferredIterable", async () => {
-  const d = new DeferredIterable<number>();
+test("Subject", async () => {
+  const d = new Subject<number>();
   d.value(1);
   d.value(2);
   d.value(3);
@@ -13,8 +13,8 @@ test("DeferredIterable", async () => {
   expect(result).toEqual([1, 2, 3]);
 });
 
-test("DeferredIterable", async () => {
-  const d = new DeferredIterable<number>();
+test("Subject", async () => {
+  const d = new Subject<number>();
   const iterator = d.iterator;
   const [, { value, done }] = await Promise.all([d.value(1), iterator.next()]);
   expect(done).toBeFalsy();

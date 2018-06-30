@@ -3,7 +3,7 @@ import { Deferred } from "./deferred";
 /**
  * The async iterator equivalent of a deferred
  */
-export class DeferredIterable<T> {
+export class Subject<T> {
   doneValue = {
     done: true,
     value: {} as T
@@ -86,9 +86,9 @@ export class DeferredIterable<T> {
   }
 
   callback(result: IteratorResult<T>) {
-    if (!(this && this instanceof DeferredIterable)) {
+    if (!(this && this instanceof Subject)) {
       const errorMessage =
-        "This must be a DeferredIterable. Have you bound this?";
+        "This must be a Subject. Have you bound this?";
       console.log(errorMessage);
       throw new Error(errorMessage);
     }

@@ -44,27 +44,27 @@ for await (const click of clicks) {
 }
 ```
 
-## DeferredIterable
+## Subject
 
-```DeferredIterable``` makes it easy to turn stream of events into an iterable. The code below
+```Subject``` makes it easy to turn stream of events into an iterable. The code below
 is essentially how ```fromEvents``` was implemented.
 
 ```javascript
-import { DeferredIterable } from "axax/es5/deferredIterable";
+import { Subject } from "axax/es5/subject";
 
-const deferredIterable = new DeferredIterable();
+const subject = new Subject();
 
-// set up a callback that calls value on the deferredIterable
-const callback = value => deferredIterable.value(value);
+// set up a callback that calls value on the subject
+const callback = value => subject.value(value);
 
 // attach the callback to the click event
 document.addEventListener('click', callback);
 
 // remove the callback when / if the iterable stops
-deferredIterable.finally(() => document.removeEventListener('click', deferredIterable.value));
+subject.finally(() => document.removeEventListener('click', subject.value));
 
 // go through all the click events
-for await (const click of deferredIterable.iterator) {
+for await (const click of subject.iterator) {
     console.log('a button was clicked');
 }
 ```

@@ -1,4 +1,4 @@
-import { DeferredIterable } from "./deferredIterable";
+import { Subject } from "./subject";
 import { toCallbacks } from "./toCallbacks";
 
 /**
@@ -7,12 +7,12 @@ import { toCallbacks } from "./toCallbacks";
  * @param sources the iterables to merge
  */
 export function merge<T>(...sources: AsyncIterable<T>[]) {
-  const deferredIterable = new DeferredIterable<T>();
+  const subject = new Subject<T>();
   sources.map(source => {
     return toCallbacks(
       source,
-      deferredIterable.callback.bind(deferredIterable)
+      subject.callback.bind(subject)
     );
   });
-  return deferredIterable.iterator;
+  return subject.iterator;
 }

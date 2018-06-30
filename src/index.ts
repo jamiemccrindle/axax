@@ -1,4 +1,4 @@
-export { DeferredIterable } from "./deferredIterable";
+export { Subject } from "./subject";
 export { restToIterable } from "./restToIterable";
 export { merge } from "./merge";
 export { lookahead } from "./lookahead";
