@@ -1,6 +1,8 @@
 # Async Iterator Extensions
 
-A library of async iterator extensions for JavaScript
+A library of async iterator extensions for JavaScript including ```map```, ```reduce```,
+```filter```, ```flatMap```, ```pipe``` and more. 
+
 
 # Installation
 
