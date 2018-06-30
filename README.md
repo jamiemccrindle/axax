@@ -47,17 +47,23 @@ for await (const click of clicks) {
 ## fromLineReader
 
 ```fromLineReader``` turns a NodeJS LineReader into an async iterable.
+The example below prints the lines from a file filtering out the
+empty ones.
 
 ```javascript
-import fs from "fs";
-import readline from "readline";
-import { fromLineReader } from "axax/esnext/fromLineReader";
+// create the line reading async iterable
+const lines = fromLineReader(
+    require("readline").createInterface({
+        input: require("fs").createReadStream("./data/example.txt")
+    })
+);
 
-const lineReader = readline.createInterface({
-    input: fs.createReadStream("./data.txt"),
-});
-for await (const line of fromLineReader(lineReader)) {
-    console.log(line); // prints the lines from the file
+// create a filter that removes empty lines
+const notEmpty = filter(line => line.length > 0);
+
+// go through each of the non empty lines
+for await (const line of notEmpty(lines)) {
+    console.log(line);
 }
 ```
 
