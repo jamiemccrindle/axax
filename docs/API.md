@@ -19,12 +19,12 @@
 
 ## Classes
 
-- [Subject](#deferrediterable)
-    - [Subject.callback](#deferrediterablecallback)
-    - [Subject.iterator](#deferrediterableiterator)
-    - [Subject.finally](#deferrediterablefinally)
-    - [Subject.value](#deferrediterablevalue)
-    - [Subject.close](#deferrediterableclose)
+- [Subject](#subject)
+    - [Subject.callback](#subjectcallback)
+    - [Subject.iterator](#subjectiterator)
+    - [Subject.finally](#subjectfinally)
+    - [Subject.onNext](#subjectonnext)
+    - [Subject.onCompleted](#subjectoncompleted)
 
 # Functions
 
@@ -293,13 +293,13 @@ import { Subject } from "axax/es5/subject";
 const subject = new Subject();
 
 // set up a callback that calls value on the subject
-const callback = value => subject.value(value);
+const callback = value => subject.onNext(value);
 
 // attach the callback to the click event
 document.addEventListener('click', callback);
 
 // remove the callback when / if the iterable stops
-subject.finally(() => document.removeEventListener('click', subject.value));
+subject.finally(() => document.removeEventListener('click', callback));
 
 // go through all the click events
 for await (const click of subject.iterator) {
@@ -349,15 +349,15 @@ for await (const item of subject.iterable) {
 The callback supplied to ```finally``` is called when the iterable finishes either 
 because it's run out of values, it has returned or an error was thrown.
 
-### Subject.value
+### Subject.onNext
 
 A helper method to pass a value to the Subject. Calling
-```subject.value('test')``` is the same as calling 
+```subject.onNext('test')``` is the same as calling 
 ```subject.callback({ done: false, value: 'test'} )```.
 
-### Subject.close
+### Subject.onCompleted
 
 A helper method to signal the last value to Subject. Calling
-```subject.close()``` is the same as calling 
+```subject.onCompleted()``` is the same as calling 
 ```subject.callback({ done: true} )```.
 

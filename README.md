@@ -13,7 +13,7 @@ npm install axax # or yarn install axax
 # Why Axax?
 
 Async iterators are a useful way to handle asynchronous streams. This library adds a number
-of utility methods similar to those found in lodash, underscore or Ramda.
+of utility methods similar to those found in lodash, underscore, Ramda or RxJs.
 
 ## es5 vs esnext
 
@@ -55,13 +55,13 @@ import { Subject } from "axax/es5/subject";
 const subject = new Subject();
 
 // set up a callback that calls value on the subject
-const callback = value => subject.value(value);
+const callback = value => subject.onNext(value);
 
 // attach the callback to the click event
 document.addEventListener('click', callback);
 
 // remove the callback when / if the iterable stops
-subject.finally(() => document.removeEventListener('click', subject.value));
+subject.finally(() => document.removeEventListener('click', callback));
 
 // go through all the click events
 for await (const click of subject.iterator) {

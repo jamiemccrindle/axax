@@ -77,11 +77,11 @@ export class Subject<T> {
     this.finallyCallbacks.push(callback);
   }
 
-  close() {
+  onCompleted() {
     return this.callback({ done: true, value: {} as T });
   }
 
-  value(value: T) {
+  onNext(value: T) {
     return this.callback({ done: false, value });
   }
 

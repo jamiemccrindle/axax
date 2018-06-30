@@ -11,7 +11,7 @@ export function interval<T>(
   let counter = 0;
   async function inner() {
     if (!subject.done) {
-      await subject.value(counter++);
+      await subject.onNext(counter++);
       (timeout || setTimeout)(inner, period);
     }
   }

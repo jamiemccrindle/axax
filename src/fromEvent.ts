@@ -8,7 +8,7 @@ export interface EventSource<T> {
 export function fromEvent<T>(source: EventSource<T>, type: string) {
   const subject = new Subject<T>();
   const callback = (event: T) => {
-    subject.value(event);
+    subject.onNext(event);
   };
   source.addEventListener(type, callback);
   subject.finally(() => source.removeEventListener(type, callback));
