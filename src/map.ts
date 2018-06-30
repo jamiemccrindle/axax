@@ -1,5 +1,5 @@
 /**
- * Concatenates to iterables
+ * Runs a mapping function over an asynchronous iterable
  */
 export function map<TFrom, TTo>(mapper: (t: TFrom, index: number) => TTo) {
   return async function* inner(source: AsyncIterable<TFrom>) {

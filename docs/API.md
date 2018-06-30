@@ -4,6 +4,7 @@
 
 - [of](#of)
 - [map](#map)
+- [concurrentMap](#concurrentmap)
 - [filter](#filter)
 - [flatMap](#flatmap)
 - [concat](#concat)
@@ -16,6 +17,7 @@
 - [scan](#scan)
 - [flatten](#flatten)
 - [pipe](#pipe)
+- [fromEvents](#fromEvents)
 
 ## Classes
 
@@ -56,6 +58,26 @@ const mapped = map(value => value * 2)(of(1, 2, 3));
 
 for await(const item of mapped) {
     console.log(item); // outputs 2, 4, 6
+}
+```
+
+## concurrentMap
+
+Concurrently go through each item in the iterable and run a mapping function.
+The mapping function must return a promise. The result will be a new iterable with 
+the transformed values.
+
+```javascript
+import { map } from "axax/es5/map";
+import { of } from "axax/es5/of";
+
+const mapped = concurrentMap(
+    async (value) => value * 2, // asybc mapping function
+    2                           // run 2 concurrently
+)(of(1, 2, 3));
+
+for await(const item of mapped) {
+    console.log(item); // outputs 2, 4, 6 in no particular order
 }
 ```
 
@@ -250,6 +272,20 @@ const flattened = flatten(of(of(1), of(2, 3)));
 
 for await(const item of flattened) {
     console.log(item); // prints 1, 2, 3
+}
+```
+
+## fromEvents
+
+```fromEvents``` turns DOM events into an iterable.
+
+```javascript
+import { fromEvents } from "axax/es5/fromEvents";
+
+const clicks = fromEvents(document, 'click');
+
+for await (const click of clicks) {
+    console.log('a button was clicked');
 }
 ```
 
