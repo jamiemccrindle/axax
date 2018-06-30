@@ -28,6 +28,10 @@ import { map } from "axax/es5/map";
 import { map } from "axax/esnext/map"; 
 ```
 
+# Reference Documentation
+
+* [API Reference](https://github.com/jamiemccrindle/axax/blob/master/docs/API.md)
+
 # Examples
 
 ## fromEvent
@@ -91,7 +95,3 @@ for await (const click of subject.iterator) {
     console.log('a button was clicked');
 }
 ```
-
-# Reference Documentation
-
-* [API Reference](https://github.com/jamiemccrindle/axax/blob/master/docs/API.md)

@@ -17,6 +17,7 @@ export class Subject<T> {
   private noMoreResults: boolean = false;
   private backPressureDeferred = new Deferred<void>();
   private finallyCallbacks: Array<() => void> = [];
+  private error?: any = undefined;
 
   constructor() {
     const self = this;
@@ -24,7 +25,7 @@ export class Subject<T> {
     this.iterator = {
       throw(e?: any) {
         self.done = true;
-        self.finallyCallbacks.map((cb) => cb());
+        self.finallyCallbacks.map(cb => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.reject(e);
@@ -33,7 +34,7 @@ export class Subject<T> {
       },
       return(value?: any) {
         self.done = true;
-        self.finallyCallbacks.map((cb) => cb());
+        self.finallyCallbacks.map(cb => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.resolve({
@@ -44,6 +45,9 @@ export class Subject<T> {
         return Promise.resolve(self.doneValue);
       },
       next(value?: any) {
+        if (self.error) {
+          return Promise.reject(self.error);
+        }
         const queuedItem = self.queue.shift();
         if (self.queue.length === 0) {
           self.backPressureDeferred.resolve();
@@ -83,6 +87,14 @@ export class Subject<T> {
 
   public onNext(value: T) {
     return this.callback({ done: false, value });
+  }
+
+  public onError(error: any) {
+    this.error = error;
+    for (const queuedDeferred of this.deferreds) {
+      queuedDeferred.reject(error);
+    }
+    this.noMoreResults = true;
   }
 
   public isDone() {
