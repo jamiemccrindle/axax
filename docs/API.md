@@ -17,7 +17,7 @@
 - [scan](#scan)
 - [flatten](#flatten)
 - [pipe](#pipe)
-- [fromEvents](#fromEvents)
+- [fromEvent](#fromevent)
 
 ## Classes
 
@@ -275,14 +275,14 @@ for await(const item of flattened) {
 }
 ```
 
-## fromEvents
+## fromEvent
 
 ```fromEvents``` turns DOM events into an iterable.
 
 ```javascript
-import { fromEvents } from "axax/es5/fromEvents";
+import { fromEvent } from "axax/es5/fromEvent";
 
-const clicks = fromEvents(document, 'click');
+const clicks = fromEvent(document, 'click');
 
 for await (const click of clicks) {
     console.log('a button was clicked');

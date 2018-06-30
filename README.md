@@ -30,14 +30,14 @@ import { map } from "axax/esnext/map";
 
 # Examples
 
-## fromEvents
+## fromEvent
 
-```fromEvents``` turns DOM events into an iterable.
+```fromEvent``` turns DOM events into an iterable.
 
 ```javascript
-import { fromEvents } from "axax/es5/fromEvents";
+import { fromEvent } from "axax/es5/fromEvent";
 
-const clicks = fromEvents(document, 'click');
+const clicks = fromEvent(document, 'click');
 
 for await (const click of clicks) {
     console.log('a button was clicked');
@@ -47,7 +47,7 @@ for await (const click of clicks) {
 ## Subject
 
 ```Subject``` makes it easy to turn stream of events into an iterable. The code below
-is essentially how ```fromEvents``` was implemented.
+is essentially how ```fromEvent``` was implemented.
 
 ```javascript
 import { Subject } from "axax/es5/subject";
