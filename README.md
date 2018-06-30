@@ -1,7 +1,7 @@
 # Async Iterator Extensions
 
 A library of async iterator extensions for JavaScript including ```map```, ```reduce```,
-```filter```, ```flatMap```, ```pipe``` and more. 
+```filter```, ```flatMap```, ```pipe``` and (more)[https://github.com/jamiemccrindle/axax/blob/master/docs/API.md#functions]. 
 
 
 # Installation
