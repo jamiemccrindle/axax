@@ -21,5 +21,9 @@
     "build": "yarn clean && tsc -p tsconfig.es5.json && tsc -p tsconfig.esnext.json"
   },
   "main": "es5/index.js",
-  "types": "es5/index.d.ts"
+  "types": "es5/index.d.ts",
+  "files": [
+    "es5",
+    "esnext"
+  ]
 }
