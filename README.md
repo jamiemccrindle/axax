@@ -48,11 +48,11 @@ for await (const click of clicks) {
 }
 ```
 
-## fromLineReader
+## pipe, map, filter, fromLineReader
 
 ```fromLineReader``` turns a NodeJS LineReader into an async iterable.
-The example below prints the lines from a file filtering out the
-empty ones.
+The example below prints the lines from a file in upper case after
+filtering out the empty ones.
 
 ```javascript
 // create the line reading async iterable
@@ -65,8 +65,11 @@ const lines = fromLineReader(
 // create a filter that removes empty lines
 const notEmpty = filter(line => line.length > 0);
 
+// convert to uppercase
+const toUpperCase = map(line => line.toUpperCase());
+
 // go through each of the non empty lines
-for await (const line of notEmpty(lines)) {
+for await (const line of pipe(notEmpty, toUpperCase)(lines)) {
     console.log(line);
 }
 ```
