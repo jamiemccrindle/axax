@@ -30,6 +30,7 @@
   - [Subject.finally](#subjectfinally)
   - [Subject.onNext](#subjectonnext)
   - [Subject.onCompleted](#subjectoncompleted)
+  - [Subject.onError](#subjectononerror)
 
 # Functions
 
@@ -439,3 +440,23 @@ A helper method to pass a value to the Subject. Calling
 A helper method to signal the last value to Subject. Calling
 `subject.onCompleted()` is the same as calling
 `subject.callback({ done: true} )`.
+
+### Subject.onError
+
+Signal that an error has occured.
+
+```javascript
+import { Subject } from "axax/es5/subject";
+
+const subject = new Subject();
+subject.onNext(1);
+subject.onError("something went wrong");
+
+try {
+    for await (const item of subject.iterable) {
+        console.log(item); // outputs 1
+    }
+} catch(e) {
+    console.log(e); // outputs "something went wrong"
+}
+```
