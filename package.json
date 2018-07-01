@@ -6,6 +6,17 @@
     "url": "https://github.com/jamiemccrindle/axax",
     "type": "git"
   },
+  "keywords": [
+    "async",
+    "async iterators",
+    "async generators",
+    "flatMap",
+    "map",
+    "merge",
+    "filter",
+    "map",
+    "reduce"
+  ],
   "devDependencies": {
     "@types/jest": "^23.1.1",
     "@types/node": "^10.3.5",
