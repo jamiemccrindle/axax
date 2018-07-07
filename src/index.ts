@@ -1,5 +1,5 @@
 export { Subject } from "./subject";
-export { restToIterable } from "./restToIterable";
+export { of } from "./of";
 export { merge } from "./merge";
 export { lookahead } from "./lookahead";
 export { toCallbacks } from "./toCallbacks";
@@ -17,3 +17,6 @@ export { tap } from "./tap";
 export { pipe } from "./pipe";
 export { flatten } from "./flatten";
 export { concurrentMap } from "./concurrentMap";
+export { from } from "./from";
+export { take } from "./take";
+export { takeWhile } from "./takeWhile";

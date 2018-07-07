@@ -5,23 +5,23 @@ export class StopError extends Error {}
  * Converts an async iterable into a series of callbacks. The function returns
  * a promise that resolves when the stream is done
  *
- * @param source the source iterable
  * @param callback the callback that gets called for each value
  */
-export async function toCallbacks<T>(
-  source: AsyncIterable<T>,
+export function toCallbacks<T>(
   callback: (result: IteratorResult<T>) => Promise<void>
 ) {
-  const iterator = source[Symbol.asyncIterator]();
-  while (true) {
-    const result = await iterator.next();
-    try {
-      await callback(result);
-    } catch (StopError) {
-      return;
+  return async function inner(source: AsyncIterable<T>) {
+    const iterator = source[Symbol.asyncIterator]();
+    while (true) {
+      const result = await iterator.next();
+      try {
+        await callback(result);
+      } catch (StopError) {
+        return;
+      }
+      if (result.done) {
+        return;
+      }
     }
-    if (result.done) {
-      return;
-    }
-  }
+  };
 }

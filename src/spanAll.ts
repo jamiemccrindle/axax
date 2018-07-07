@@ -1,27 +1,35 @@
 import { Subject } from "./subject";
 import { toCallbacks } from "./toCallbacks";
+import { StopError } from "../es5/toCallbacks";
 
 export function spanAll<T>(predicate: (t: T) => boolean) {
   return function inner(source: AsyncIterable<T>) {
-    const spanDeferredIterable = new Subject<AsyncIterable<T>>();
-    let currentDeferredIterable = new Subject<T>();
-    spanDeferredIterable.onNext(currentDeferredIterable.iterator);
-    toCallbacks(source, result => {
+    let done = false;
+    const spanSubject = new Subject<AsyncIterable<T>>();
+    spanSubject.finally(() => {
+      done = true;
+    });
+    let currentSubject = new Subject<T>();
+    spanSubject.onNext(currentSubject.iterator);
+    toCallbacks<T>(result => {
+      if (done) {
+        throw new StopError();
+      }
       if (result.done) {
-        currentDeferredIterable.onCompleted();
-        spanDeferredIterable.onCompleted();
+        currentSubject.onCompleted();
+        spanSubject.onCompleted();
         return Promise.resolve();
       }
       if (predicate(result.value)) {
-        currentDeferredIterable.onCompleted();
-        currentDeferredIterable = new Subject<T>();
-        spanDeferredIterable.onNext(currentDeferredIterable.iterator);
+        currentSubject.onCompleted();
+        currentSubject = new Subject<T>();
+        spanSubject.onNext(currentSubject.iterator);
       } else {
-        currentDeferredIterable.onNext(result.value);
+        currentSubject.onNext(result.value);
       }
       // not handling back pressure at the moment
       return Promise.resolve();
-    });
-    return spanDeferredIterable.iterator;
+    })(source);
+    return spanSubject.iterator;
   };
 }

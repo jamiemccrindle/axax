@@ -1,9 +1,9 @@
 import { lookahead } from "../lookahead";
-import { restToIterable } from "../restToIterable";
+import { of } from "../of";
 import { toArray } from "../toArray";
 
 test("lookahead", async () => {
-  const result = await lookahead(2)(restToIterable(1, 2, 3));
+  const result = await lookahead(2)(of(1, 2, 3));
   expect(result.values).toEqual([1, 2]);
   expect(await toArray(result.iterable)).toEqual([1, 2, 3]);
 });
