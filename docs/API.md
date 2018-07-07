@@ -21,6 +21,8 @@
 - [interval](#interval)
 - [sum](#sum)
 - [count](#count)
+- [take](#take)
+- [takeWhile](#takewhile)
 
 ## Classes
 
@@ -351,6 +353,30 @@ import { of } from "axax/es5/of";
 
 const counted = await count(of(1, 2, 3, 4));
 console.log(counted); // outputs 4
+```
+
+## take
+
+Take the first x values from the async iterator
+
+```javascript
+import { take } from "axax/es5/take";
+import { of } from "axax/es5/of";
+
+const taken = await take(2)(of(1, 2, 3, 4));
+console.log(taken); // outputs 1, 2
+```
+
+## takeWhile
+
+Take values while a predicate holds true
+
+```javascript
+import { takeWhile } from "axax/es5/takeWhile";
+import { of } from "axax/es5/of";
+
+const taken = await takeWhile(value => value < 3)(of(1, 2, 3, 4));
+console.log(taken); // outputs 1, 2
 ```
 
 # Classes
