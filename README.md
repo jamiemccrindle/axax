@@ -130,4 +130,4 @@ subject1.onNext(1)
 If you need to be able to cancel async iterators that may never return values, 
 consider Rx or regular Observables for now.
 
-(Thanks to @awto for the example)
+(Thanks to [@awto](https://github.com/awto) for the example)
