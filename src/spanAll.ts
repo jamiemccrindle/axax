@@ -1,6 +1,5 @@
 import { Subject } from "./subject";
-import { toCallbacks } from "./toCallbacks";
-import { StopError } from "../es5/toCallbacks";
+import { StopError, toCallbacks } from "./toCallbacks";
 
 export function spanAll<T>(predicate: (t: T) => boolean) {
   return function inner(source: AsyncIterable<T>) {
