@@ -23,6 +23,7 @@
 - [count](#count)
 - [take](#take)
 - [takeWhile](#takewhile)
+- [from](#from)
 
 ## Classes
 
@@ -377,6 +378,20 @@ import { of } from "axax/es5/of";
 
 const taken = await takeWhile(value => value < 3)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
+```
+
+## from
+
+Turn an array into an async iterable
+
+```javascript
+import { from } from "axax/es5/from";
+
+const values = from([1, 2, 3]);
+
+for await(const item of values) {
+    console.log(item); // outputs 1, 2, 3
+}
 ```
 
 # Classes
