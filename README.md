@@ -98,3 +98,34 @@ for await (const click of subject.iterator) {
     console.log('a button was clicked');
 }
 ```
+
+# Avoiding leaks
+
+It's possible to have an async iterator leak if it never returns a value e.g.:
+
+```javascript
+const subject1 = new Subject();
+const subject2 = new Subject();
+
+async function* neverEnds() {
+  try {
+    for await(const i of subject2.iterator) {
+      yield i;
+    }
+  } finally {
+    console.log("never called")
+  }
+}
+
+async function* run() {
+  for await(const i of merge(subject1.iterator,something())) {
+    break;
+  }
+}
+
+run()
+subject1.onNext(1)
+```
+
+If you need to be able to cancel async iterators that may never return values, 
+consider Rx or regular Observables for now.
