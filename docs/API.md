@@ -75,7 +75,7 @@ The mapping function must return a promise. The result will be a new iterable wi
 the transformed values.
 
 ```javascript
-import { map } from "axax/es5/map";
+import { concurrentMap } from "axax/es5/concurrentMap";
 import { of } from "axax/es5/of";
 
 const mapped = concurrentMap(
