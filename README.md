@@ -118,7 +118,7 @@ async function* neverEnds() {
 }
 
 async function* run() {
-  for await(const i of merge(subject1.iterator,something())) {
+  for await(const i of merge(subject1.iterator,neverEnds())) {
     break;
   }
 }
