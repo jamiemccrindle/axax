@@ -6,6 +6,7 @@
 - [map](#map)
 - [concurrentMap](#concurrentmap)
 - [filter](#filter)
+- [first](#first)
 - [flatMap](#flatmap)
 - [concat](#concat)
 - [reduce](#reduce)
@@ -123,6 +124,23 @@ const filtered = filter(
 
 for await(const item of filtered) {
     console.log(item); // outputs 2, 4, 6
+}
+```
+
+## first
+
+Take the first value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the first value of the async iterable.
+
+```javascript
+import { first } from "axax/es5/first";
+import { of } from "axax/es5/of";
+
+const firsted = first(
+    value => value % 2 === 0
+)(of(1, 2, 3, 4, 5, 6));
+
+for await(const item of firsted) {
+    console.log(item); // outputs 2
 }
 ```
 
