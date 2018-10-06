@@ -135,7 +135,7 @@ Take the first value of ansync iterable that fullfills the predicate. If not pre
 import { first } from "axax/es5/first";
 import { of } from "axax/es5/of";
 
-const firsted = filter(
+const firsted = first(
     value => value % 2 === 0
 )(of(1, 2, 3, 4, 5, 6));
 
