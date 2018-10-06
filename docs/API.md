@@ -7,6 +7,7 @@
 - [concurrentMap](#concurrentmap)
 - [filter](#filter)
 - [first](#first)
+- [last](#last)
 - [flatMap](#flatmap)
 - [concat](#concat)
 - [reduce](#reduce)
@@ -141,6 +142,23 @@ const firsted = first(
 
 for await(const item of firsted) {
     console.log(item); // outputs 2
+}
+```
+
+## last
+
+Take the last value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the last value of the async iterable. Optionally include a second argument that will be returned if no value of the async iterable fulfills the predicate.
+
+```javascript
+import { last } from "axax/es5/last";
+import { of } from "axax/es5/of";
+
+const lasted = last(
+    value => value % 2 === 0
+)(of(1, 2, 3, 4, 5, 6, 7));
+
+for await(const item of lasted) {
+    console.log(item); // outputs 6
 }
 ```
 
