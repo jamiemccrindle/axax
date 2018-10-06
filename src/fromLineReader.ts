@@ -8,5 +8,7 @@ export function fromLineReader(lineReader: readline.ReadLine) {
 
   lineReader.on("close", () => subject.onCompleted());
 
+  subject.finally(() => lineReader.close());
+
   return subject.iterator;
 }

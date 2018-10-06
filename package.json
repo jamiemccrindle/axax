@@ -18,18 +18,21 @@
     "reduce"
   ],
   "devDependencies": {
-    "@types/jest": "^23.1.1",
-    "@types/node": "^10.3.5",
-    "jest": "^23.1.0",
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.9.4",
+    "jest": "^23.5.0",
+    "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
-    "ts-jest": "^22.4.6",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2"
+    "ts-jest": "^23.1.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
   },
   "scripts": {
+    "lint": "tslint --project tsconfig.json",
     "test": "jest",
     "clean": "rimraf es5 esnext",
-    "build": "yarn clean && tsc -p tsconfig.es5.json && tsc -p tsconfig.esnext.json"
+    "build": "yarn clean && yarn lint && tsc -p tsconfig.es5.json && tsc -p tsconfig.esnext.json"
   },
   "main": "es5/index.js",
   "types": "es5/index.d.ts",
