@@ -20,6 +20,7 @@ Make sure the tests pass:
 
 Make your change.
 Write tests.
+Update the [API documentation](./docs/API.md)
 We use prettier to format the code.
 Make the tests pass:
 
