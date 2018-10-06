@@ -139,7 +139,7 @@ const firsted = filter(
     value => value % 2 === 0
 )(of(1, 2, 3, 4, 5, 6));
 
-for await(const item of filtered) {
+for await(const item of firsted) {
     console.log(item); // outputs 2
 }
 ```
