@@ -12,6 +12,7 @@ export { zip } from "./zip";
 export { toArray } from "./toArray";
 export { filter } from "./filter";
 export { first } from "./first";
+export { last } from "./last";
 export { concat } from "./concat";
 export { fromEvent } from "./fromEvent";
 export { tap } from "./tap";
