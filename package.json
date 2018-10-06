@@ -39,5 +39,8 @@
   "files": [
     "es5",
     "esnext"
-  ]
+  ],
+  "dependencies": {
+    "node": "^10.11.0"
+  }
 }
