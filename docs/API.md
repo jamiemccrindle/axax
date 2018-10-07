@@ -26,6 +26,11 @@
 - [take](#take)
 - [takeWhile](#takewhile)
 - [from](#from)
+- [every](#every)
+- [skip](#skip)
+- [skipWhile](#skipWhile)
+- [distinctUntilChanged](#distinctUntilChanged)
+
 
 ## Classes
 
@@ -428,6 +433,53 @@ const values = from([1, 2, 3]);
 for await(const item of values) {
     console.log(item); // outputs 1, 2, 3
 }
+```
+
+## every
+
+If all values pass predicate before completion emit true, else false.
+
+```javascript
+import { every } from "axax/es5/every";
+
+const everyFalseCase = await every(value => value % 2 === 0)(of(1, 2, 3, 4, 5, 6));
+console.log(everyFalseCase); // outputs false
+
+const everyTrueCase = await every(value => value % 2 === 0)(of( 2, 4, 6));
+console.log(everyTrueCase); // outputs true
+```
+
+## skip
+
+skips the first x values from an async iterable
+
+```javascript
+import { skip } from "axax/es5/skip";
+
+const skip = await skip(2)(of(1, 2, 3, 4));
+console.log(skip); // outputs 3, 4
+```
+
+## skipWhile
+
+Skipwhile emitted values from source until provided expression is false.
+
+```javascript
+import { skipWhile } from "axax/es5/skipWhile";
+
+const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
+console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
+```
+
+## distinctUntilChanged
+
+Only emit when the current value is different than the last.
+
+```javascript
+import { distinctUntilChanged } from "axax/es5/distinctUntilChanged";
+
+const distinct = await distinctUntilChanged(of(0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 6, 6));
+console.log(distinct); // outputs 0, 1, 3, 4, 5, 6
 ```
 
 # Classes
