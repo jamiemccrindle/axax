@@ -19,6 +19,7 @@
 - [scan](#scan)
 - [flatten](#flatten)
 - [pipe](#pipe)
+- [pluck] (#pluck)
 - [fromEvent](#fromevent)
 - [interval](#interval)
 - [sum](#sum)
@@ -371,6 +372,38 @@ const piped = pipe(
 for await(const item of piped) {
     console.log(item); // prints 4, 8
 }
+```
+
+## pluck
+
+Map source objects to a property specified by the given keys.
+Returns the unchanged source on empty input or undefined
+when any property in the path is undefined.
+
+```javascript
+import { from } from "axax/es5/from";
+import { pipe } from "axax/es5/pipe";
+import { pluck } from "axax/es5/pluck";
+
+const persons = [
+    {
+        name: "Anna",
+        age: 29,
+    },
+    {
+        name: "Max",
+        age: 41,
+    },
+]
+
+const piped = pipe(
+    pluck("name"))
+(from(persons));
+
+for await(const item of piped) {
+    console.log(item); // prints "Anna", "Max"
+}
+
 ```
 
 ## sum
