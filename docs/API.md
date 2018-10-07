@@ -25,6 +25,7 @@
 - [count](#count)
 - [take](#take)
 - [takeWhile](#takewhile)
+- [skipWhile](#skipwhile)
 - [from](#from)
 - [every](#every)
 - [skip](#skip)
@@ -419,6 +420,18 @@ import { of } from "axax/es5/of";
 
 const taken = await takeWhile(value => value < 3)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
+```
+
+## skipWhile
+
+Skip taking values until predicate becomes false. After that, all values are taken, no matter the predicate
+
+```javascript
+import { skipWhile } from "axax/es5/skipWhile";
+import { of } from "axax/es5/of";
+
+const taken = await skipWhile((value: number) => value < 2 || value > 4)(of(1, 2, 3, 4, 5));
+console.log(taken); // outputs 2, 3, 4, 5
 ```
 
 ## from
