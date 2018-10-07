@@ -462,10 +462,13 @@ console.log(skip); // outputs 3, 4
 
 ## skipWhile
 
-Skipwhile emitted values from source until provided expression is false. (Work in progress.)
+Skipwhile emitted values from source until provided expression is false.
 
 ```javascript
+import { skipWhile } from "axax/es5/skipWhile";
 
+const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
+console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
 ```
 
 ## distinctUntilChanged
