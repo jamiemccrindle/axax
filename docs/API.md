@@ -19,7 +19,7 @@
 - [scan](#scan)
 - [flatten](#flatten)
 - [pipe](#pipe)
-- [pluck] (#pluck)
+- [pluck](#pluck)
 - [fromEvent](#fromevent)
 - [interval](#interval)
 - [sum](#sum)
@@ -470,7 +470,7 @@ for await(const item of values) {
 
 ## every
 
-If all values pass predicate before completion emit true, else false.
+If all values pass predicate before completion return true, else false.
 
 ```javascript
 import { every } from "axax/es5/every";
