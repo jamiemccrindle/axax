@@ -5,6 +5,8 @@ to abide by the axax [code of conduct].
 
 [code of conduct]: ./CODE_OF_CONDUCT.md
 
+Make sure you have a recent version of nodejs (10.x+)
+
 Fork the repo:
 
     git clone git@github.com:jamiemccrindle/axax.git
