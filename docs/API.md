@@ -2,35 +2,35 @@
 
 ## Functions
 
-- [of](#of)
-- [map](#map)
+- [concat](#concat)
 - [concurrentMap](#concurrentmap)
+- [count](#count)
+- [distinctUntilChanged](#distinctUntilChanged)
+- [every](#every)
 - [filter](#filter)
 - [first](#first)
-- [last](#last)
 - [flatMap](#flatmap)
-- [concat](#concat)
-- [reduce](#reduce)
-- [merge](#merge)
-- [insert](#insert)
-- [tap](#tap)
-- [zip](#zip)
-- [range](#range)
-- [scan](#scan)
 - [flatten](#flatten)
+- [from](#from)
+- [fromEvent](#fromevent)
+- [insert](#insert)
+- [interval](#interval)
+- [last](#last)
+- [map](#map)
+- [merge](#merge)
+- [of](#of)
 - [pipe](#pipe)
 - [pluck](#pluck)
-- [fromEvent](#fromevent)
-- [interval](#interval)
-- [sum](#sum)
-- [count](#count)
-- [take](#take)
-- [takeWhile](#takewhile)
-- [from](#from)
-- [every](#every)
+- [range](#range)
+- [reduce](#reduce)
+- [scan](#scan)
 - [skip](#skip)
 - [skipWhile](#skipWhile)
-- [distinctUntilChanged](#distinctUntilChanged)
+- [sum](#sum)
+- [take](#take)
+- [takeWhile](#takewhile)
+- [tap](#tap)
+- [zip](#zip)
 
 
 ## Classes
@@ -45,34 +45,20 @@
 
 # Functions
 
-## of
+## concat
 
-Construct a new async iterable from a series
-of values.
-
-```javascript
-import { of } from "axax/es5/of";
-
-const values = of(1, 2, 3);
-
-for await(const item of values) {
-    console.log(item); // outputs 1, 2, 3
-}
-```
-
-## map
-
-Go through each item in the iterable and run a mapping function. The result will be a new
-iterable with the transformed values.
+Concatenate 2 iterables in order
 
 ```javascript
-import { map } from "axax/es5/map";
+import { concat } from "axax/es5/concat";
 import { of } from "axax/es5/of";
 
-const mapped = map(value => value * 2)(of(1, 2, 3));
+const concatted = concat(
+    of(1, 2)
+)(of(3, 4));
 
-for await(const item of mapped) {
-    console.log(item); // outputs 2, 4, 6
+for await(const item of concatted) {
+    console.log(item); // outputs 1, 2, 3, 4
 }
 ```
 
@@ -96,25 +82,41 @@ for await(const item of mapped) {
 }
 ```
 
-## flatMap
+## count
 
-Go through each item in the iterable and run a mapping function that returns an async iterable. The
-result is then flattened.
+Counts the values returned by an async iterator
 
 ```javascript
-import { flatMap } from "axax/es5/flatMap";
+import { count } from "axax/es5/count";
 import { of } from "axax/es5/of";
 
-const mapped = flatMap(
-    async function* (value) {
-        yield value;
-        yield value;
-    }
-)(of(1, 2, 3);
+const counted = await count(of(1, 2, 3, 4));
+console.log(counted); // outputs 4
+```
 
-for await(const item of mapped) {
-    console.log(item); // outputs 1, 1, 2, 2, 3, 3
-}
+## distinctUntilChanged
+
+Only emit when the current value is different than the last.
+
+```javascript
+import { distinctUntilChanged } from "axax/es5/distinctUntilChanged";
+
+const distinct = await distinctUntilChanged(of(0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 6, 6));
+console.log(distinct); // outputs 0, 1, 3, 4, 5, 6
+```
+
+## every
+
+If all values pass predicate before completion return true, else false.
+
+```javascript
+import { every } from "axax/es5/every";
+
+const everyFalseCase = await every(value => value % 2 === 0)(of(1, 2, 3, 4, 5, 6));
+console.log(everyFalseCase); // outputs false
+
+const everyTrueCase = await every(value => value % 2 === 0)(of( 2, 4, 6));
+console.log(everyTrueCase); // outputs true
 ```
 
 ## filter
@@ -151,72 +153,67 @@ for await(const item of firsted) {
 }
 ```
 
-## last
+## flatMap
 
-Take the last value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the last value of the async iterable. Optionally include a second argument that will be returned if no value of the async iterable fulfills the predicate.
+Go through each item in the iterable and run a mapping function that returns an async iterable. The
+result is then flattened.
 
 ```javascript
-import { last } from "axax/es5/last";
+import { flatMap } from "axax/es5/flatMap";
 import { of } from "axax/es5/of";
 
-const lasted = last(
-    value => value % 2 === 0
-)(of(1, 2, 3, 4, 5, 6, 7));
+const mapped = flatMap(
+    async function* (value) {
+        yield value;
+        yield value;
+    }
+)(of(1, 2, 3);
 
-for await(const item of lasted) {
-    console.log(item); // outputs 6
+for await(const item of mapped) {
+    console.log(item); // outputs 1, 1, 2, 2, 3, 3
 }
 ```
 
-## concat
+## flatten
 
-Concatenate 2 iterables in order
+Flattens an async iterable of async iterables.
 
 ```javascript
-import { concat } from "axax/es5/concat";
+import { flatten } from "axax/es5/flatten";
 import { of } from "axax/es5/of";
 
-const concatted = concat(
-    of(1, 2)
-)(of(3, 4));
+const flattened = flatten(of(of(1), of(2, 3)));
 
-for await(const item of concatted) {
-    console.log(item); // outputs 1, 2, 3, 4
+for await(const item of flattened) {
+    console.log(item); // prints 1, 2, 3
 }
 ```
 
-## reduce
+## from
 
-Reduce a series of values to a single result. The series of values is
-reduced by a function that compbines a running total or accumulator with
-the next value to produce the new total or accumulator.
+Turn an array into an async iterable
 
 ```javascript
-import { reduce } from "axax/es5/reduce";
-import { of } from "axax/es5/of";
+import { from } from "axax/es5/from";
 
-const reduced = reduce(
-  (accumulator, next) => accumulator + next, // sum the values together
-  0
-)(of(1, 2, 3));
+const values = from([1, 2, 3]);
 
-console.log(reduced); // 6
+for await(const item of values) {
+    console.log(item); // outputs 1, 2, 3
+}
 ```
 
-## merge
+## fromEvent
 
-Merge a number of async iterators into one concurrently. Order is not important.
+`fromEvents` turns DOM events into an iterable.
 
 ```javascript
-import { merge } from "axax/es5/merge";
-import { of } from "axax/es5/of";
+import { fromEvent } from "axax/es5/fromEvent";
 
-const merged = merge(
-    of(1, 2), of(3, 4)
-);
+const clicks = fromEvent(document, 'click');
 
-for await(const item of merged) {
-    console.log(item); // outputs 1, 2, 3, 4 in no particular order
+for await (const click of clicks) {
+    console.log('a button was clicked');
 }
 ```
 
@@ -237,106 +234,6 @@ for await(const item of inserted) {
 }
 ```
 
-## tap
-
-'Taps' an async iterable. Allows you to run a function for
-every item in the iterable but doesn't do anything with the
-result of the function. Typically used for side effects like
-logging.
-
-```javascript
-import { tap } from "axax/es5/tap";
-import { of } from "axax/es5/of";
-
-const tapped = tap(
-    value => console.log(value) // prints 1, 2, 3
-)(of(1, 2, 3));
-
-for await(const item of tapped) {
-    console.log(item); // prints 1, 2, 3
-}
-```
-
-## zip
-
-Creates a new iterable out of the two supplied by pairing up equally-positioned items from both iterables. The returned iterable is truncated to the length of the shorter of the two input iterables.
-
-```javascript
-import { zip } from "axax/es5/zip";
-import { of } from "axax/es5/of";
-
-const zipped = zip(
-    of(1, 2)
-)(of(1, 2));
-
-for await(const item of zipped) {
-    console.log(item); // prints [1, 1], [2, 2]
-}
-```
-
-## range
-
-Creates an iterable of numbers (positive and/or negative)
-progressing from start up to, but not including, end. A step
-of -1 is used if a negative start is specified without an end
-or step. If end is not specified, it's set to start with start
-then set to 0.
-
-```javascript
-import { range } from "axax/es5/range";
-import { of } from "axax/es5/of";
-
-const ranged = range(1, 3);
-
-for await(const item of ranged) {
-    console.log(item); // prints 1, 2
-}
-```
-
-## scan
-
-Similar to a reduce except that it outputs the accumulator as it goes.
-
-```javascript
-import { scan } from "axax/es5/scan";
-import { of } from "axax/es5/of";
-
-const scanned = scan((accumulator, value) => accumulator + value, 0)(of(1, 2, 3));
-
-for await(const item of scanned) {
-    console.log(item); // prints 0, 1, 3, 6
-}
-```
-
-## flatten
-
-Flattens an async iterable of async iterables.
-
-```javascript
-import { flatten } from "axax/es5/flatten";
-import { of } from "axax/es5/of";
-
-const flattened = flatten(of(of(1), of(2, 3)));
-
-for await(const item of flattened) {
-    console.log(item); // prints 1, 2, 3
-}
-```
-
-## fromEvent
-
-`fromEvents` turns DOM events into an iterable.
-
-```javascript
-import { fromEvent } from "axax/es5/fromEvent";
-
-const clicks = fromEvent(document, 'click');
-
-for await (const click of clicks) {
-    console.log('a button was clicked');
-}
-```
-
 ## interval
 
 Keep returning an incrementing number with a fixed delay between
@@ -350,6 +247,71 @@ for await (const item of interval(1000)) {
     if(item >= 10) {
         break;         // stop the iterable
     }
+}
+```
+
+## last
+
+Take the last value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the last value of the async iterable. Optionally include a second argument that will be returned if no value of the async iterable fulfills the predicate.
+
+```javascript
+import { last } from "axax/es5/last";
+import { of } from "axax/es5/of";
+
+const lasted = last(
+    value => value % 2 === 0
+)(of(1, 2, 3, 4, 5, 6, 7));
+
+for await(const item of lasted) {
+    console.log(item); // outputs 6
+}
+```
+
+## map
+
+Go through each item in the iterable and run a mapping function. The result will be a new
+iterable with the transformed values.
+
+```javascript
+import { map } from "axax/es5/map";
+import { of } from "axax/es5/of";
+
+const mapped = map(value => value * 2)(of(1, 2, 3));
+
+for await(const item of mapped) {
+    console.log(item); // outputs 2, 4, 6
+}
+```
+
+## merge
+
+Merge a number of async iterators into one concurrently. Order is not important.
+
+```javascript
+import { merge } from "axax/es5/merge";
+import { of } from "axax/es5/of";
+
+const merged = merge(
+    of(1, 2), of(3, 4)
+);
+
+for await(const item of merged) {
+    console.log(item); // outputs 1, 2, 3, 4 in no particular order
+}
+```
+
+## of
+
+Construct a new async iterable from a series
+of values.
+
+```javascript
+import { of } from "axax/es5/of";
+
+const values = of(1, 2, 3);
+
+for await(const item of values) {
+    console.log(item); // outputs 1, 2, 3
 }
 ```
 
@@ -406,6 +368,80 @@ for await(const item of piped) {
 
 ```
 
+## range
+
+Creates an iterable of numbers (positive and/or negative)
+progressing from start up to, but not including, end. A step
+of -1 is used if a negative start is specified without an end
+or step. If end is not specified, it's set to start with start
+then set to 0.
+
+```javascript
+import { range } from "axax/es5/range";
+import { of } from "axax/es5/of";
+
+const ranged = range(1, 3);
+
+for await(const item of ranged) {
+    console.log(item); // prints 1, 2
+}
+```
+
+## reduce
+
+Reduce a series of values to a single result. The series of values is
+reduced by a function that compbines a running total or accumulator with
+the next value to produce the new total or accumulator.
+
+```javascript
+import { reduce } from "axax/es5/reduce";
+import { of } from "axax/es5/of";
+
+const reduced = reduce(
+  (accumulator, next) => accumulator + next, // sum the values together
+  0
+)(of(1, 2, 3));
+
+console.log(reduced); // 6
+```
+
+## scan
+
+Similar to a reduce except that it outputs the accumulator as it goes.
+
+```javascript
+import { scan } from "axax/es5/scan";
+import { of } from "axax/es5/of";
+
+const scanned = scan((accumulator, value) => accumulator + value, 0)(of(1, 2, 3));
+
+for await(const item of scanned) {
+    console.log(item); // prints 0, 1, 3, 6
+}
+```
+
+## skip
+
+skips the first x values from an async iterable
+
+```javascript
+import { skip } from "axax/es5/skip";
+
+const skip = await skip(2)(of(1, 2, 3, 4));
+console.log(skip); // outputs 3, 4
+```
+
+## skipWhile
+
+Skipwhile emitted values from source until provided expression is false.
+
+```javascript
+import { skipWhile } from "axax/es5/skipWhile";
+
+const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
+console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
+```
+
 ## sum
 
 Sum the values returned by an async iterator
@@ -417,17 +453,6 @@ import { of } from "axax/es5/of";
 const summed = await sum(of(1, 2, 3, 4));
 console.log(summed); // outputs 10
 
-```
-## count
-
-Counts the values returned by an async iterator
-
-```javascript
-import { count } from "axax/es5/count";
-import { of } from "axax/es5/of";
-
-const counted = await count(of(1, 2, 3, 4));
-console.log(counted); // outputs 4
 ```
 
 ## take
@@ -454,65 +479,41 @@ const taken = await takeWhile(value => value < 3)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
 ```
 
-## from
+## tap
 
-Turn an array into an async iterable
+'Taps' an async iterable. Allows you to run a function for
+every item in the iterable but doesn't do anything with the
+result of the function. Typically used for side effects like
+logging.
 
 ```javascript
-import { from } from "axax/es5/from";
+import { tap } from "axax/es5/tap";
+import { of } from "axax/es5/of";
 
-const values = from([1, 2, 3]);
+const tapped = tap(
+    value => console.log(value) // prints 1, 2, 3
+)(of(1, 2, 3));
 
-for await(const item of values) {
-    console.log(item); // outputs 1, 2, 3
+for await(const item of tapped) {
+    console.log(item); // prints 1, 2, 3
 }
 ```
 
-## every
+## zip
 
-If all values pass predicate before completion return true, else false.
-
-```javascript
-import { every } from "axax/es5/every";
-
-const everyFalseCase = await every(value => value % 2 === 0)(of(1, 2, 3, 4, 5, 6));
-console.log(everyFalseCase); // outputs false
-
-const everyTrueCase = await every(value => value % 2 === 0)(of( 2, 4, 6));
-console.log(everyTrueCase); // outputs true
-```
-
-## skip
-
-skips the first x values from an async iterable
+Creates a new iterable out of the two supplied by pairing up equally-positioned items from both iterables. The returned iterable is truncated to the length of the shorter of the two input iterables.
 
 ```javascript
-import { skip } from "axax/es5/skip";
+import { zip } from "axax/es5/zip";
+import { of } from "axax/es5/of";
 
-const skip = await skip(2)(of(1, 2, 3, 4));
-console.log(skip); // outputs 3, 4
-```
+const zipped = zip(
+    of(1, 2)
+)(of(1, 2));
 
-## skipWhile
-
-Skipwhile emitted values from source until provided expression is false.
-
-```javascript
-import { skipWhile } from "axax/es5/skipWhile";
-
-const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
-console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
-```
-
-## distinctUntilChanged
-
-Only emit when the current value is different than the last.
-
-```javascript
-import { distinctUntilChanged } from "axax/es5/distinctUntilChanged";
-
-const distinct = await distinctUntilChanged(of(0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 6, 6));
-console.log(distinct); // outputs 0, 1, 3, 4, 5, 6
+for await(const item of zipped) {
+    console.log(item); // prints [1, 1], [2, 2]
+}
 ```
 
 # Classes
