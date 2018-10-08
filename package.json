@@ -18,15 +18,15 @@
     "reduce"
   ],
   "devDependencies": {
-    "@types/jest": "^23.3.1",
-    "@types/node": "^10.9.4",
-    "jest": "^23.5.0",
+    "@types/jest": "^23.3.3",
+    "@types/node": "^10.11.4",
+    "jest": "^23.6.0",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
-    "ts-jest": "^23.1.4",
+    "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.1.1"
   },
   "scripts": {
     "lint": "tslint --project tsconfig.json",
