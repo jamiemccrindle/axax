@@ -26,6 +26,7 @@
 - [scan](#scan)
 - [skip](#skip)
 - [skipWhile](#skipWhile)
+- [some](#some)
 - [sum](#sum)
 - [take](#take)
 - [takeWhile](#takewhile)
@@ -442,6 +443,20 @@ const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
 console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
 ```
 
+## some
+
+If any values pass predicate before completion return true, else false.
+
+```javascript
+import { some } from "axax/es5/some";
+
+const someFalseCase = await some(value => value % 2 === 0)(of(1, 3, 5, 7, 9));
+console.log(someFalseCase); // outputs false
+
+const someTrueCase = await some(value => value % 2 === 0)(of(1, 2, 3));
+console.log(someTrueCase); // outputs true
+```
+
 ## sum
 
 Sum the values returned by an async iterator
@@ -520,7 +535,7 @@ for await(const item of zipped) {
 
 ## Subject
 
-`Subject` makes it easy to turn stream of events into an interable.
+`Subject` makes it easy to turn stream of events into an iterable.
 
 You typically interact with `Subject` in 3 ways:
 
