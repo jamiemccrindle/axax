@@ -13,7 +13,7 @@ export function zip<T>(first: AsyncIterable<T>) {
       if (firstNext.done || secondNext.done) {
         return;
       }
-      yield [firstNext, secondNext];
+      yield [firstNext.value, secondNext.value] as [T, T];
     }
   };
 }
