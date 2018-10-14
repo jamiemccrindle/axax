@@ -19,8 +19,8 @@ Add any other context about the feature request here.
 **Describe the feature**
 A clear and concise description of what the feature is.
 
-**Check out the [contributing guide]**
-(https://github.com/jamiemccrindle/axax/blob/master/CONTRIBUTING.md) to help you get started.
+**Check out the contributing guide**
+The [contributing guide](https://github.com/jamiemccrindle/axax/blob/master/CONTRIBUTING.md) will help you get started.
 
 **Have a look at how axax operators are written**
 Please have a look at how the other methods are written in axax e.g. they typically are curried e.g. here's map:
