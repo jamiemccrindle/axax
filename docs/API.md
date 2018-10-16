@@ -31,6 +31,7 @@
 - [take](#take)
 - [takeWhile](#takewhile)
 - [tap](#tap)
+- [throttle](#throttle)
 - [zip](#zip)
 
 
@@ -511,6 +512,23 @@ const tapped = tap(
 
 for await(const item of tapped) {
     console.log(item); // prints 1, 2, 3
+}
+```
+
+## Throttle
+Emits a value and then drops all values until the promise returned by the timer is resolved.
+
+ ```javascript
+import { interval } from "axax/es5/interval";
+import { take } from "axax/es5/take";
+import { throttle } from "axax/es5/throttle";
+import { wait} from "axax/es5/wait";
+
+const timer = () => wait(100);
+const counterToTenFiveMsIntervals = take(10)(interval(5));
+const throttled = throttle(timer)(counterToTenFiveMsIntervals);
+for await (const item of throttled) {
+  console.log(item); // prints 0, 2, 4, 6, 8
 }
 ```
 
