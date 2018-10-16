@@ -5,6 +5,7 @@
 - [concat](#concat)
 - [concurrentMap](#concurrentmap)
 - [count](#count)
+- [debounce](#debounce)
 - [distinctUntilChanged](#distinctUntilChanged)
 - [every](#every)
 - [filter](#filter)
@@ -93,6 +94,26 @@ import { of } from "axax/es5/of";
 
 const counted = await count(of(1, 2, 3, 4));
 console.log(counted); // outputs 4
+```
+
+## Debounce
+
+Prevents emitting of values until the promise returned by the timer is resolved.
+When the timer resolves, emit the latest value from the async iterator.
+
+```javascript
+import { debounce } from "axax/es5/debounce";
+import { interval } from "axax/es5/interval";
+import { take } from "axax/es5/take";
+import { wait} from "axax/es5/wait";
+
+const timer = () => wait(100);
+const counterToTenFiveMsIntervals = take(10)(interval(5));
+const debounced = debounce(timer)(counterToTenFiveMsIntervals);
+
+for await (const item of debounced) {
+  console.log(item); // prints 1, 3, 5, 7, 9
+}
 ```
 
 ## distinctUntilChanged
