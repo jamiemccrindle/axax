@@ -5,7 +5,7 @@
 - [concat](#concat)
 - [concurrentMap](#concurrentmap)
 - [count](#count)
-- [distinctUntilChanged](#distinctUntilChanged)
+- [distinctUntilChanged](#distinctuntilchanged)
 - [every](#every)
 - [filter](#filter)
 - [first](#first)
@@ -13,6 +13,7 @@
 - [flatten](#flatten)
 - [from](#from)
 - [fromEvent](#fromevent)
+- [fromNodeStream](#fromnodestream)
 - [insert](#insert)
 - [interval](#interval)
 - [last](#last)
@@ -217,6 +218,19 @@ const clicks = fromEvent(document, 'click');
 for await (const click of clicks) {
     console.log('a button was clicked');
 }
+```
+
+## fromNodeStream
+Turns a Node stream into an iterable
+```javascript
+import { fromNodeStream } from "axax/es5/fromNodeStream"
+
+const stream = fs.createReadStream('foo.txt');
+const iterable = fromNodeStream(stream);
+for await (const item of iterable) {
+    console.log(item); // outputs chunk of buffer
+}
+
 ```
 
 ## insert
