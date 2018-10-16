@@ -26,3 +26,4 @@ export { throttle } from "./throttle";
 export { range } from "./range";
 export { count } from "./count";
 export { sum } from "./sum";
+export { debounce } from "./debounce";
