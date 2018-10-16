@@ -22,6 +22,7 @@ export { concurrentMap } from "./concurrentMap";
 export { from } from "./from";
 export { take } from "./take";
 export { takeWhile } from "./takeWhile";
+export { throttle } from "./throttle";
 export { range } from "./range";
 export { count } from "./count";
 export { sum } from "./sum";

@@ -6,7 +6,7 @@
 - [concurrentMap](#concurrentmap)
 - [count](#count)
 - [debounce](#debounce)
-- [distinctUntilChanged](#distinctUntilChanged)
+- [distinctUntilChanged](#distinctuntilchanged)
 - [every](#every)
 - [filter](#filter)
 - [first](#first)
@@ -14,6 +14,7 @@
 - [flatten](#flatten)
 - [from](#from)
 - [fromEvent](#fromevent)
+- [fromNodeStream](#fromnodestream)
 - [insert](#insert)
 - [interval](#interval)
 - [last](#last)
@@ -32,6 +33,7 @@
 - [take](#take)
 - [takeWhile](#takewhile)
 - [tap](#tap)
+- [throttle](#throttle)
 - [zip](#zip)
 
 
@@ -237,6 +239,19 @@ const clicks = fromEvent(document, 'click');
 for await (const click of clicks) {
     console.log('a button was clicked');
 }
+```
+
+## fromNodeStream
+Turns a Node stream into an iterable
+```javascript
+import { fromNodeStream } from "axax/es5/fromNodeStream"
+
+const stream = fs.createReadStream('foo.txt');
+const iterable = fromNodeStream(stream);
+for await (const item of iterable) {
+    console.log(item); // outputs chunk of buffer
+}
+
 ```
 
 ## insert
@@ -532,6 +547,23 @@ const tapped = tap(
 
 for await(const item of tapped) {
     console.log(item); // prints 1, 2, 3
+}
+```
+
+## Throttle
+Emits a value and then drops all values until the promise returned by the timer is resolved.
+
+ ```javascript
+import { interval } from "axax/es5/interval";
+import { take } from "axax/es5/take";
+import { throttle } from "axax/es5/throttle";
+import { wait} from "axax/es5/wait";
+
+const timer = () => wait(100);
+const counterToTenFiveMsIntervals = take(10)(interval(5));
+const throttled = throttle(timer)(counterToTenFiveMsIntervals);
+for await (const item of throttled) {
+  console.log(item); // prints 0, 2, 4, 6, 8
 }
 ```
 
