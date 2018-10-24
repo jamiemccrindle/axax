@@ -66,6 +66,11 @@ for await(const item of concatted) {
 }
 ```
 
+```javascript
+// call signature
+function concat(first: AsyncIterable): (second: AsyncIterable) => AsyncIterableIterator
+```
+
 ## concurrentMap
 
 Concurrently go through each item in the iterable and run a mapping function.
@@ -86,6 +91,14 @@ for await(const item of mapped) {
 }
 ```
 
+```javascript
+// call signature
+function concurrentMap(
+    mapper: (value) => Promise,
+    concurrency: number
+    ): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## count
 
 Counts the values returned by an async iterator
@@ -96,6 +109,11 @@ import { of } from "axax/es5/of";
 
 const counted = await count(of(1, 2, 3, 4));
 console.log(counted); // outputs 4
+```
+
+```javascript
+// call signature
+function count(source: AsyncIterable): Promise<number>
 ```
 
 ## Debounce
@@ -118,6 +136,11 @@ for await (const item of debounced) {
 }
 ```
 
+```javascript
+// call signature
+function debounce(timer: (value) => Promise<void>): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## distinctUntilChanged
 
 Only emit when the current value is different than the last.
@@ -127,6 +150,11 @@ import { distinctUntilChanged } from "axax/es5/distinctUntilChanged";
 
 const distinct = await distinctUntilChanged(of(0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 6, 6));
 console.log(distinct); // outputs 0, 1, 3, 4, 5, 6
+```
+
+```javascript
+// call signature
+function distinctUntilChanged(): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## every
@@ -141,6 +169,11 @@ console.log(everyFalseCase); // outputs false
 
 const everyTrueCase = await every(value => value % 2 === 0)(of( 2, 4, 6));
 console.log(everyTrueCase); // outputs true
+```
+
+```javascript
+// call signature
+function every(predicate?: (value) => boolean): (source: AsyncIterable) => Promise<boolean>
 ```
 
 ## filter
@@ -160,6 +193,11 @@ for await(const item of filtered) {
 }
 ```
 
+```javascript
+// call signature
+function filter(predicate: (value) => boolean | Promise<boolean>): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## first
 
 Take the first value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the first value of the async iterable.
@@ -175,6 +213,11 @@ const firsted = first(
 for await(const item of firsted) {
     console.log(item); // outputs 2
 }
+```
+
+```javascript
+// call signature
+function first(predicate?: (value) => boolean): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## flatMap
@@ -198,6 +241,11 @@ for await(const item of mapped) {
 }
 ```
 
+```javascript
+// call signature
+function flatMap(mapper: (value) => AsyncIterable): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## flatten
 
 Flattens an async iterable of async iterables.
@@ -211,6 +259,11 @@ const flattened = flatten(of(of(1), of(2, 3)));
 for await(const item of flattened) {
     console.log(item); // prints 1, 2, 3
 }
+```
+
+```javascript
+// call signature
+function flatten(source: AsyncIterable<AsyncIterable>): AsyncIterableIterator
 ```
 
 ## from
@@ -227,6 +280,11 @@ for await(const item of values) {
 }
 ```
 
+```javascript
+// call signature
+function from(values: Array): AsyncIterableIterator
+```
+
 ## fromEvent
 
 `fromEvents` turns DOM events into an iterable.
@@ -241,6 +299,11 @@ for await (const click of clicks) {
 }
 ```
 
+```javascript
+// call signature
+function fromEvent(eventSource, type: string): AsyncIterableIterator
+```
+
 ## fromNodeStream
 Turns a Node stream into an iterable
 ```javascript
@@ -252,6 +315,11 @@ for await (const item of iterable) {
     console.log(item); // outputs chunk of buffer
 }
 
+```
+
+```javascript
+// call signature
+function fromNodeStream(stream: fs.ReadStream): AsyncIterableIterator<string | Buffer>
 ```
 
 ## insert
@@ -271,6 +339,11 @@ for await(const item of inserted) {
 }
 ```
 
+```javascript
+// call signature
+function insert(...values: Array): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## interval
 
 Keep returning an incrementing number with a fixed delay between
@@ -285,6 +358,11 @@ for await (const item of interval(1000)) {
         break;         // stop the iterable
     }
 }
+```
+
+```javascript
+// call signature
+function interval<T>(period: number, timeout?: (callback: () => void, delay: number) => void): AsyncIterableIterator<number>
 ```
 
 ## last
@@ -304,6 +382,11 @@ for await(const item of lasted) {
 }
 ```
 
+```javascript
+// call signature
+function last(predicate?: (value) => boolean, defaultValue?): (source: AsyncIterable) => AsyncIterableIterator<T>
+```
+
 ## map
 
 Go through each item in the iterable and run a mapping function. The result will be a new
@@ -318,6 +401,11 @@ const mapped = map(value => value * 2)(of(1, 2, 3));
 for await(const item of mapped) {
     console.log(item); // outputs 2, 4, 6
 }
+```
+
+```javascript
+// call signature
+function map(mapper: (value, index: number) => T | Promise<T>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## merge
@@ -337,6 +425,11 @@ for await(const item of merged) {
 }
 ```
 
+```javascript
+// call signature
+function merge(...sources: AsyncIterable[]): AsyncIterableIterator
+```
+
 ## of
 
 Construct a new async iterable from a series
@@ -350,6 +443,11 @@ const values = of(1, 2, 3);
 for await(const item of values) {
     console.log(item); // outputs 1, 2, 3
 }
+```
+
+```javascript
+// call signature
+function of(...values: Array): AsyncIterableIterator
 ```
 
 ## pipe
@@ -371,6 +469,11 @@ const piped = pipe(
 for await(const item of piped) {
     console.log(item); // prints 4, 8
 }
+```
+
+```javascript
+// call signature
+function pipe(...funcs: ((iterable: AsyncIterable) => any)[]): (source: AsyncIterable) => AsyncIterable
 ```
 
 ## pluck
@@ -405,6 +508,11 @@ for await(const item of piped) {
 
 ```
 
+```javascript
+// call signature
+function pluck(...path: string[]): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## range
 
 Creates an iterable of numbers (positive and/or negative)
@@ -422,6 +530,11 @@ const ranged = range(1, 3);
 for await(const item of ranged) {
     console.log(item); // prints 1, 2
 }
+```
+
+```javascript
+// call signature
+function range(startOrEnd: number, end: number, step?: number): AsyncIterableIterator<number>
 ```
 
 ## reduce
@@ -442,6 +555,11 @@ const reduced = reduce(
 console.log(reduced); // 6
 ```
 
+```javascript
+// call signature
+function reduce(reducer: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => Promise
+```
+
 ## scan
 
 Similar to a reduce except that it outputs the accumulator as it goes.
@@ -457,6 +575,11 @@ for await(const item of scanned) {
 }
 ```
 
+```javascript
+// call signature
+function scan<(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## skip
 
 skips the first x values from an async iterable
@@ -468,6 +591,11 @@ const skip = await skip(2)(of(1, 2, 3, 4));
 console.log(skip); // outputs 3, 4
 ```
 
+```javascript
+// call signature
+function scan<(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## skipWhile
 
 Skipwhile emitted values from source until provided expression is false.
@@ -477,6 +605,11 @@ import { skipWhile } from "axax/es5/skipWhile";
 
 const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
 console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
+```
+
+```javascript
+// call signature
+function skipWhile(predicate?: (value) => boolean): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## some
@@ -493,6 +626,11 @@ const someTrueCase = await some(value => value % 2 === 0)(of(1, 2, 3));
 console.log(someTrueCase); // outputs true
 ```
 
+```javascript
+// call signature
+function some(predicate?: (value) => boolean): (source: AsyncIterable) => Promise<boolean>
+```
+
 ## sum
 
 Sum the values returned by an async iterator
@@ -503,7 +641,11 @@ import { of } from "axax/es5/of";
 
 const summed = await sum(of(1, 2, 3, 4));
 console.log(summed); // outputs 10
+```
 
+```javascript
+// call signature
+function sum(source: AsyncIterable<number>): Promise<number>
 ```
 
 ## take
@@ -518,6 +660,11 @@ const taken = await take(2)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
 ```
 
+```javascript
+// call signature
+function take(numberToTake: number): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## takeWhile
 
 Take values while a predicate holds true
@@ -528,6 +675,11 @@ import { of } from "axax/es5/of";
 
 const taken = await takeWhile(value => value < 3)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
+```
+
+```javascript
+// call signature
+function takeWhile(predicate: (value) => boolean): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## tap
@@ -550,6 +702,11 @@ for await(const item of tapped) {
 }
 ```
 
+```javascript
+// call signature
+function tap(func: (value) => void): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## Throttle
 Emits a value and then drops all values until the promise returned by the timer is resolved.
 
@@ -567,6 +724,11 @@ for await (const item of throttled) {
 }
 ```
 
+```javascript
+// call signature
+function throttle(timer: (value) => Promise<void>): (source: AsyncIterable) => AsyncIterableIterator
+```
+
 ## zip
 
 Creates a new iterable out of the two supplied by pairing up equally-positioned items from both iterables. The returned iterable is truncated to the length of the shorter of the two input iterables.
@@ -582,6 +744,11 @@ const zipped = zip(
 for await(const item of zipped) {
     console.log(item); // prints [1, 1], [2, 2]
 }
+```
+
+```javascript
+// call signature
+function zip(first: AsyncIterable): (second: AsyncIterable) => AsyncIterableIterator
 ```
 
 # Classes
