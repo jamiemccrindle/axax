@@ -14,6 +14,7 @@
 - [flatten](#flatten)
 - [from](#from)
 - [fromEvent](#fromevent)
+- [fromLineReader](#fromlinereader)
 - [fromNodeStream](#fromnodestream)
 - [insert](#insert)
 - [interval](#interval)
@@ -296,6 +297,18 @@ const clicks = fromEvent(document, 'click');
 
 for await (const click of clicks) {
     console.log('a button was clicked');
+}
+```
+## fromLineReader
+Turns a readline event listener from the package `readline` into an iterable.
+
+```javascript
+import { fromLineReader } from "axax/es5/fromLineReader"
+
+const rl = readline('./foo.txt')
+const iterable = fromLineReader(rl);
+for await (const item of iterable) {
+    console.log(item); // outputs line in file
 }
 ```
 
