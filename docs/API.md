@@ -67,8 +67,9 @@ for await(const item of concatted) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function concat(first: AsyncIterable): (second: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -92,8 +93,9 @@ for await(const item of mapped) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function concurrentMap(
     mapper: (value) => Promise,
     concurrency: number
@@ -112,8 +114,9 @@ const counted = await count(of(1, 2, 3, 4));
 console.log(counted); // outputs 4
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function count(source: AsyncIterable): Promise<number>
 ```
 
@@ -137,8 +140,9 @@ for await (const item of debounced) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function debounce(timer: (value) => Promise<void>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -153,8 +157,9 @@ const distinct = await distinctUntilChanged(of(0, 1, 1, 1, 3, 3, 4, 5, 6, 6, 6, 
 console.log(distinct); // outputs 0, 1, 3, 4, 5, 6
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function distinctUntilChanged(): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -172,8 +177,9 @@ const everyTrueCase = await every(value => value % 2 === 0)(of( 2, 4, 6));
 console.log(everyTrueCase); // outputs true
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function every(predicate?: (value) => boolean): (source: AsyncIterable) => Promise<boolean>
 ```
 
@@ -194,8 +200,9 @@ for await(const item of filtered) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function filter(predicate: (value) => boolean | Promise<boolean>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -216,8 +223,9 @@ for await(const item of firsted) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function first(predicate?: (value) => boolean): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -242,8 +250,9 @@ for await(const item of mapped) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function flatMap(mapper: (value) => AsyncIterable): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -262,8 +271,9 @@ for await(const item of flattened) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function flatten(source: AsyncIterable<AsyncIterable>): AsyncIterableIterator
 ```
 
@@ -281,8 +291,9 @@ for await(const item of values) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function from(values: Array): AsyncIterableIterator
 ```
 
@@ -312,8 +323,9 @@ for await (const item of iterable) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function fromEvent(eventSource, type: string): AsyncIterableIterator
 ```
 
@@ -330,8 +342,9 @@ for await (const item of iterable) {
 
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function fromNodeStream(stream: fs.ReadStream): AsyncIterableIterator<string | Buffer>
 ```
 
@@ -352,8 +365,9 @@ for await(const item of inserted) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function insert(...values: Array): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -373,8 +387,9 @@ for await (const item of interval(1000)) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function interval<T>(period: number, timeout?: (callback: () => void, delay: number) => void): AsyncIterableIterator<number>
 ```
 
@@ -395,8 +410,9 @@ for await(const item of lasted) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function last(predicate?: (value) => boolean, defaultValue?): (source: AsyncIterable) => AsyncIterableIterator<T>
 ```
 
@@ -416,8 +432,9 @@ for await(const item of mapped) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function map(mapper: (value, index: number) => T | Promise<T>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -438,8 +455,9 @@ for await(const item of merged) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function merge(...sources: AsyncIterable[]): AsyncIterableIterator
 ```
 
@@ -458,8 +476,9 @@ for await(const item of values) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function of(...values: Array): AsyncIterableIterator
 ```
 
@@ -484,8 +503,9 @@ for await(const item of piped) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function pipe(...funcs: ((iterable: AsyncIterable) => any)[]): (source: AsyncIterable) => AsyncIterable
 ```
 
@@ -521,8 +541,9 @@ for await(const item of piped) {
 
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function pluck(...path: string[]): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -545,8 +566,9 @@ for await(const item of ranged) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function range(startOrEnd: number, end: number, step?: number): AsyncIterableIterator<number>
 ```
 
@@ -568,8 +590,9 @@ const reduced = reduce(
 console.log(reduced); // 6
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function reduce(reducer: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => Promise
 ```
 
@@ -588,8 +611,9 @@ for await(const item of scanned) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function scan<(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -604,8 +628,9 @@ const skip = await skip(2)(of(1, 2, 3, 4));
 console.log(skip); // outputs 3, 4
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function scan<(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -620,8 +645,9 @@ const skip = await skipWhile(value => value < 2)(of(0, 1, 2, 3, 4, 5, 6, 1, 2));
 console.log(skip); // outputs  2, 3, 4, 5, 6, 1, 2
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function skipWhile(predicate?: (value) => boolean): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -639,8 +665,9 @@ const someTrueCase = await some(value => value % 2 === 0)(of(1, 2, 3));
 console.log(someTrueCase); // outputs true
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function some(predicate?: (value) => boolean): (source: AsyncIterable) => Promise<boolean>
 ```
 
@@ -656,8 +683,9 @@ const summed = await sum(of(1, 2, 3, 4));
 console.log(summed); // outputs 10
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function sum(source: AsyncIterable<number>): Promise<number>
 ```
 
@@ -673,8 +701,9 @@ const taken = await take(2)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function take(numberToTake: number): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -690,8 +719,9 @@ const taken = await takeWhile(value => value < 3)(of(1, 2, 3, 4));
 console.log(taken); // outputs 1, 2
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function takeWhile(predicate: (value) => boolean): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -715,8 +745,9 @@ for await(const item of tapped) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function tap(func: (value) => void): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -737,8 +768,9 @@ for await (const item of throttled) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function throttle(timer: (value) => Promise<void>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
@@ -759,8 +791,9 @@ for await(const item of zipped) {
 }
 ```
 
+### Call signature
+
 ```javascript
-// call signature
 function zip(first: AsyncIterable): (second: AsyncIterable) => AsyncIterableIterator
 ```
 
