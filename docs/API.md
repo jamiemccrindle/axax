@@ -2,6 +2,7 @@
 
 ## Functions
 
+- [combineLatest](#combinelatest)
 - [concat](#concat)
 - [concurrentMap](#concurrentmap)
 - [count](#count)
@@ -49,6 +50,44 @@
   - [Subject.onError](#subjectononerror)
 
 # Functions
+
+## combineLatest
+
+Combines the output of a number of async iterators.
+It will only start outputting values when it has received
+at least one value from all of the source iterators.
+The result is an array with the latest value from each source
+async iterator.
+
+```javascript
+import { combineLatest } from "axax/es5/combineLatest";
+import { of } from "axax/es5/of";
+import { wait } from "axax/es5/wait";
+
+const combined = combineLatest(
+    async function* first() {
+        yield 1;
+        await wait(200);
+        yield 2;
+    },
+    async function* second() {
+        await wait(100)
+        yield 3;
+        await wait(200);
+        yield 4;
+    }
+);
+
+for await(const item of combined) {
+    console.log(item); // outputs [[1, 3], [2, 3], [2, 4]]
+}
+```
+
+### Call signature
+
+```javascript
+function merge(...sources: AsyncIterable[]): AsyncIterableIterator
+```
 
 ## concat
 
