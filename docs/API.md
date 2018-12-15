@@ -86,7 +86,7 @@ for await(const item of combined) {
 ### Call signature
 
 ```javascript
-function merge(...sources: AsyncIterable[]): AsyncIterableIterator
+function combineLatest(...sources: AsyncIterable[]): AsyncIterableIterator
 ```
 
 ## concat
