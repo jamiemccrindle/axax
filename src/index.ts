@@ -27,3 +27,5 @@ export { range } from "./range";
 export { count } from "./count";
 export { sum } from "./sum";
 export { debounce } from "./debounce";
+export { skip } from "./skip";
+export { skipWhile } from "./skipWhile";
