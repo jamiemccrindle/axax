@@ -29,7 +29,7 @@
 - [reduce](#reduce)
 - [scan](#scan)
 - [skip](#skip)
-- [skipWhile](#skipWhile)
+- [skipWhile](#skipwhile)
 - [some](#some)
 - [sum](#sum)
 - [take](#take)
@@ -47,7 +47,7 @@
   - [Subject.finally](#subjectfinally)
   - [Subject.onNext](#subjectonnext)
   - [Subject.onCompleted](#subjectoncompleted)
-  - [Subject.onError](#subjectononerror)
+  - [Subject.onError](#subjectonerror)
 
 # Functions
 
@@ -247,7 +247,7 @@ function filter(predicate: (value) => boolean | Promise<boolean>): (source: Asyn
 
 ## first
 
-Take the first value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the first value of the async iterable.
+Take the first value of async iterable that fullfills the predicate. If not predicate is provided, it returns the first value of the async iterable.
 
 ```javascript
 import { first } from "axax/es5/first";
@@ -365,7 +365,7 @@ for await (const item of iterable) {
 ### Call signature
 
 ```javascript
-function fromEvent(eventSource, type: string): AsyncIterableIterator
+function fromLineReader(eventSource, type: string): AsyncIterableIterator
 ```
 
 ## fromNodeStream
@@ -434,7 +434,7 @@ function interval<T>(period: number, timeout?: (callback: () => void, delay: num
 
 ## last
 
-Take the last value of ansync iterable that fullfills the predicate. If not predicate is provided, it returns the last value of the async iterable. Optionally include a second argument that will be returned if no value of the async iterable fulfills the predicate.
+Take the last value of async iterable that fullfills the predicate. If not predicate is provided, it returns the last value of the async iterable. Optionally include a second argument that will be returned if no value of the async iterable fulfills the predicate.
 
 ```javascript
 import { last } from "axax/es5/last";
@@ -653,7 +653,7 @@ for await(const item of scanned) {
 ### Call signature
 
 ```javascript
-function scan<(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
+function scan(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## skip
@@ -670,7 +670,7 @@ console.log(skip); // outputs 3, 4
 ### Call signature
 
 ```javascript
-function scan<(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
+function skip(scanner: (accumulator, next) => A | Promise<A>, init: A | Promise<A>): (source: AsyncIterable) => AsyncIterableIterator
 ```
 
 ## skipWhile
@@ -846,7 +846,7 @@ You typically interact with `Subject` in 3 ways:
 
 - To send data into the `Subject` call the `onNext` function with a value
 - To complete sending data, call `onComplete`
-- To read data from the `Subject` use the `iterable` property.
+- To read data from the `Subject` use the `iterator` property.
 
 ### Example
 
@@ -889,7 +889,7 @@ for await (const item of subject.iterator) {
 }
 ```
 
-### Subject.iterable
+### Subject.iterator
 
 An `AsyncIterable` that returns values supplied by calling `callback`.
 
@@ -902,7 +902,7 @@ subject.callback({ done: false, value: 2 });
 subject.callback({ done: false, value: 3 });
 subject.callback({ done: true });
 
-for await (const item of subject.iterable) {
+for await (const item of subject.iterator) {
     console.log(item); // prints 1, 2, 3
 }
 ```
