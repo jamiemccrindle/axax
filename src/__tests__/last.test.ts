@@ -21,6 +21,6 @@ test("last with no value fulfilling predicate", async () => {
 
 test("last with default value", async () => {
   const result = await toArray(
-      last((value: number) => value % 8 === 0, 42)(of(1, 2, 3, 4, 5, 6)));
+      last<number>((value: number) => value % 8 === 0, 42)(of(1, 2, 3, 4, 5, 6)));
   expect(result).toEqual([42]);
 });
