@@ -8,3 +8,10 @@ test("filter", async () => {
   );
   expect(result).toEqual([2, 4, 6]);
 });
+
+test("async filter", async () => {
+  const result = await toArray(
+    filter(async () => false)(of(1, 2, 3))
+  );
+  expect(result).toEqual([]);
+});
