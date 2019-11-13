@@ -17,10 +17,11 @@ export function toCallbacks<T>(
       try {
         await callback(result);
       } catch (err) {
+        iterator.return();
         if (err instanceof StopError) {
-          return iterator.return();
+          return;
         } else {
-          await iterator.throw(err);
+          throw err;
         }
       }
       if (result.done) {
