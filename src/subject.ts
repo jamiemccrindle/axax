@@ -25,7 +25,7 @@ export class Subject<T> {
     this.iterator = {
       throw(e?: any) {
         self.done = true;
-        self.finallyCallbacks.map(cb => cb());
+        self.finallyCallbacks.forEach(cb => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.reject(e);
@@ -34,7 +34,7 @@ export class Subject<T> {
       },
       return(value?: any) {
         self.done = true;
-        self.finallyCallbacks.map(cb => cb());
+        self.finallyCallbacks.forEach(cb => cb());
         // fail any waiting deferreds
         for (const deferred of self.deferreds) {
           deferred.resolve({
@@ -58,7 +58,7 @@ export class Subject<T> {
         } else {
           if (self.noMoreResults && !self.done) {
             self.done = true;
-            self.finallyCallbacks.map(cb => cb());
+            self.finallyCallbacks.forEach(cb => cb());
           }
           if (self.done) {
             return Promise.resolve({
