@@ -29,3 +29,5 @@ export { sum } from "./sum";
 export { debounce } from "./debounce";
 export { skip } from "./skip";
 export { skipWhile } from "./skipWhile";
+export { wait } from "./wait";
+
