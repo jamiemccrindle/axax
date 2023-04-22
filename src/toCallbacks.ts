@@ -16,8 +16,13 @@ export function toCallbacks<T>(
       const result = await iterator.next();
       try {
         await callback(result);
-      } catch (StopError) {
-        return;
+      } catch (err) {
+        iterator.return();
+        if (err instanceof StopError) {
+          return;
+        } else {
+          throw err;
+        }
       }
       if (result.done) {
         return;
